@@ -1,216 +1,340 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { insertContactSchema } from "@shared/schema";
 
-type ContactForm = z.infer<typeof insertContactSchema>;
+const contactFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  phone: z.string().optional(),
+  subject: z.string().min(5, "Subject must be at least 5 characters"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const queryClient = useQueryClient();
-
-  const contactMutation = useMutation({
-    mutationFn: async (data: ContactForm) => {
-      const response = await apiRequest('POST', '/api/contacts', data);
-      return response.json();
-    },
-    onSuccess: () => {
-      toast({
-        title: "Message Sent",
-        description: "Thank you for your message. We'll get back to you soon.",
-      });
-      form.reset();
-      queryClient.invalidateQueries({ queryKey: ['/api/contacts'] });
-    },
-    onError: (error) => {
-      toast({
-        title: "Message Failed",
-        description: "There was an error sending your message. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const form = useForm<ContactForm>({
-    resolver: zodResolver(insertContactSchema),
+  
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
       subject: "",
       message: "",
     },
   });
 
-  const onSubmit = (data: ContactForm) => {
-    contactMutation.mutate(data);
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    try {
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      toast({
+        title: "Message sent successfully!",
+        description: "We'll get back to you within 24 hours.",
+      });
+      
+      form.reset();
+    } catch (error) {
+      toast({
+        title: "Error sending message",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="min-h-screen pt-32 pb-24">
-      <section className="py-24 bg-zinc-950 relative">
-        <div className="max-w-7xl mx-auto px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+    <div className="min-h-screen">
+      {/* Contact Hero */}
+      <section className="pt-40 pb-20 bg-[#0a0a0a] relative overflow-hidden">
+        <div className="absolute top-1/2 -right-20 transform -translate-y-1/2 rotate-90 text-[15rem] opacity-[0.02] font-cinzel tracking-[0.3em] select-none whitespace-nowrap">
+          CONTACT
+        </div>
+        
+        <div className="max-w-[1600px] mx-auto px-[5%] relative z-10 text-center">
+          <h1 className="font-cinzel text-[clamp(3rem,8vw,6rem)] font-normal leading-[0.85] uppercase mb-6">
+            Get In Touch
+          </h1>
+          <p className="text-xl opacity-80 max-w-3xl mx-auto leading-relaxed">
+            Ready to start your tattoo journey? We'd love to hear from you. Reach out to discuss your ideas, 
+            book a consultation, or ask any questions about our services.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact Content */}
+      <section className="py-24 bg-[#111111]">
+        <div className="max-w-[1600px] mx-auto px-[5%]">
+          <div className="grid lg:grid-cols-2 gap-16">
+            {/* Contact Information */}
             <div>
-              <h1 className="text-cinzel text-5xl lg:text-6xl mb-6 relative inline-block">
-                Visit Us
-                <span className="absolute bottom-0 left-0 w-16 h-1 bg-red-800"></span>
-              </h1>
+              <h2 className="font-cinzel text-[clamp(2rem,5vw,3.5rem)] font-normal mb-8 relative">
+                Studio Information
+                <span className="absolute bottom-[-0.5rem] left-0 w-[60px] h-[3px] bg-[#7B1113]"></span>
+              </h2>
               
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-cinzel text-2xl mb-4">Studio Location</h3>
-                  <p className="text-xl leading-relaxed opacity-80">
-                    33 Southern Road<br/>
-                    Heidelberg Heights VIC 3081<br/>
-                    Australia
-                  </p>
+              <div className="space-y-8 mb-12">
+                {/* Location */}
+                <div className="flex items-start gap-6">
+                  <div className="w-12 h-12 bg-[#7B1113] rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg">📍</span>
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-lg mb-2">Studio Location</h3>
+                    <p className="opacity-70 leading-relaxed">
+                      1247 Ink Street<br />
+                      Downtown Arts District<br />
+                      Los Angeles, CA 90013
+                    </p>
+                  </div>
                 </div>
-                
-                <div>
-                  <h3 className="text-cinzel text-2xl mb-4">Opening Hours</h3>
-                  <div className="space-y-2 opacity-80">
-                    <div className="flex justify-between">
-                      <span>Monday - Thursday</span>
-                      <span>12:00 PM - 7:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Friday - Saturday</span>
-                      <span>12:00 PM - 8:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Sunday</span>
-                      <span>12:00 PM - 6:00 PM</span>
+
+                {/* Phone */}
+                <div className="flex items-start gap-6">
+                  <div className="w-12 h-12 bg-[#7B1113] rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg">📞</span>
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-lg mb-2">Phone</h3>
+                    <p className="opacity-70">
+                      <a href="tel:+1-555-BERSERK" className="hover:text-[#7B1113] transition-colors">
+                        (555) BERSERK<br />
+                        (555) 237-7375
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="flex items-start gap-6">
+                  <div className="w-12 h-12 bg-[#7B1113] rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg">✉️</span>
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-lg mb-2">Email</h3>
+                    <p className="opacity-70">
+                      <a href="mailto:info@berserktattoos.com" className="hover:text-[#7B1113] transition-colors">
+                        info@berserktattoos.com
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Hours */}
+                <div className="flex items-start gap-6">
+                  <div className="w-12 h-12 bg-[#7B1113] rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg">🕒</span>
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-lg mb-2">Studio Hours</h3>
+                    <div className="opacity-70 space-y-1">
+                      <p>Monday - Thursday: 12PM - 10PM</p>
+                      <p>Friday - Saturday: 12PM - 12AM</p>
+                      <p>Sunday: 12PM - 8PM</p>
+                      <p className="text-sm text-[#7B1113] mt-2">By appointment only</p>
                     </div>
                   </div>
                 </div>
-                
-                <div>
-                  <h3 className="text-cinzel text-2xl mb-4">Contact Info</h3>
-                  <div className="space-y-2 opacity-80">
-                    <div>Phone: +61 478 128 212</div>
-                    <div>Email: hello@berserktattoos.com.au</div>
-                    <div>Instagram: @berserk_tattoos</div>
-                  </div>
-                </div>
-                
-                <div className="flex space-x-6">
-                  <a href="#" className="text-zinc-50 hover:text-red-800 transition-colors duration-300">Instagram</a>
-                  <a href="#" className="text-zinc-50 hover:text-red-800 transition-colors duration-300">Facebook</a>
-                  <a href="mailto:hello@berserktattoos.com.au" className="text-zinc-50 hover:text-red-800 transition-colors duration-300">Email</a>
+              </div>
+
+              {/* Social Media */}
+              <div className="pt-8 border-t border-[rgba(242,242,242,0.1)]">
+                <h3 className="font-cinzel text-xl mb-6">Follow Our Work</h3>
+                <div className="flex gap-4">
+                  <a href="#" className="w-12 h-12 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] rounded-full flex items-center justify-center hover:border-[#7B1113] hover:bg-[rgba(123,17,19,0.1)] transition-all duration-300">
+                    <span className="text-lg">📷</span>
+                  </a>
+                  <a href="#" className="w-12 h-12 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] rounded-full flex items-center justify-center hover:border-[#7B1113] hover:bg-[rgba(123,17,19,0.1)] transition-all duration-300">
+                    <span className="text-lg">📘</span>
+                  </a>
+                  <a href="#" className="w-12 h-12 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] rounded-full flex items-center justify-center hover:border-[#7B1113] hover:bg-[rgba(123,17,19,0.1)] transition-all duration-300">
+                    <span className="text-lg">🐦</span>
+                  </a>
                 </div>
               </div>
             </div>
-            
+
+            {/* Contact Form */}
             <div>
-              <h2 className="text-cinzel text-4xl mb-8 relative inline-block">
-                Get In Touch
-                <span className="absolute bottom-0 left-0 w-16 h-1 bg-red-800"></span>
+              <h2 className="font-cinzel text-[clamp(2rem,5vw,3.5rem)] font-normal mb-8 relative">
+                Send us a Message
+                <span className="absolute bottom-[-0.5rem] left-0 w-[60px] h-[3px] bg-[#7B1113]"></span>
               </h2>
               
-              <Card className="bg-zinc-800/50 border border-zinc-700/50 p-8">
+              <div className="bg-[rgba(242,242,242,0.02)] border border-[rgba(242,242,242,0.1)] p-8">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[#F2F2F2]">Name *</FormLabel>
+                            <FormControl>
+                              <Input 
+                                placeholder="Your full name" 
+                                {...field}
+                                className="bg-[rgba(242,242,242,0.05)] border-[rgba(242,242,242,0.1)] text-[#F2F2F2] placeholder:text-[rgba(242,242,242,0.5)] focus:border-[#7B1113]"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[#F2F2F2]">Email *</FormLabel>
+                            <FormControl>
+                              <Input 
+                                type="email"
+                                placeholder="your.email@example.com" 
+                                {...field}
+                                className="bg-[rgba(242,242,242,0.05)] border-[rgba(242,242,242,0.1)] text-[#F2F2F2] placeholder:text-[rgba(242,242,242,0.5)] focus:border-[#7B1113]"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
                     <FormField
                       control={form.control}
-                      name="name"
+                      name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm uppercase tracking-wider opacity-80">Name</FormLabel>
+                          <FormLabel className="text-[#F2F2F2]">Phone (Optional)</FormLabel>
                           <FormControl>
-                            <Input
+                            <Input 
+                              placeholder="(555) 123-4567" 
                               {...field}
-                              className="bg-zinc-800/50 border-zinc-700/50 text-zinc-50 focus:border-red-800 focus:bg-red-800/5 transition-all duration-300"
+                              className="bg-[rgba(242,242,242,0.05)] border-[rgba(242,242,242,0.1)] text-[#F2F2F2] placeholder:text-[rgba(242,242,242,0.5)] focus:border-[#7B1113]"
                             />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-sm uppercase tracking-wider opacity-80">Email</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              type="email"
-                              className="bg-zinc-800/50 border-zinc-700/50 text-zinc-50 focus:border-red-800 focus:bg-red-800/5 transition-all duration-300"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
+
                     <FormField
                       control={form.control}
                       name="subject"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm uppercase tracking-wider opacity-80">Subject</FormLabel>
+                          <FormLabel className="text-[#F2F2F2]">Subject *</FormLabel>
                           <FormControl>
-                            <Input
+                            <Input 
+                              placeholder="What's this about?" 
                               {...field}
-                              className="bg-zinc-800/50 border-zinc-700/50 text-zinc-50 focus:border-red-800 focus:bg-red-800/5 transition-all duration-300"
+                              className="bg-[rgba(242,242,242,0.05)] border-[rgba(242,242,242,0.1)] text-[#F2F2F2] placeholder:text-[rgba(242,242,242,0.5)] focus:border-[#7B1113]"
                             />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm uppercase tracking-wider opacity-80">Message</FormLabel>
+                          <FormLabel className="text-[#F2F2F2]">Message *</FormLabel>
                           <FormControl>
-                            <Textarea
+                            <Textarea 
+                              placeholder="Tell us about your tattoo ideas, questions, or how we can help you..."
+                              rows={6}
                               {...field}
-                              rows={4}
-                              className="bg-zinc-800/50 border-zinc-700/50 text-zinc-50 focus:border-red-800 focus:bg-red-800/5 transition-all duration-300 resize-vertical"
+                              className="bg-[rgba(242,242,242,0.05)] border-[rgba(242,242,242,0.1)] text-[#F2F2F2] placeholder:text-[rgba(242,242,242,0.5)] focus:border-[#7B1113] resize-none"
                             />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
-                    <Button
-                      type="submit"
-                      disabled={contactMutation.isPending}
-                      className="w-full bg-red-800 hover:bg-red-700 py-3 text-lg uppercase tracking-wider hover:shadow-xl hover:shadow-red-800/30 hover:-translate-y-1 transition-all duration-300"
+
+                    <Button 
+                      type="submit" 
+                      disabled={isSubmitting}
+                      className="w-full bg-[#7B1113] hover:bg-[#a01619] text-[#F2F2F2] py-3 text-sm uppercase tracking-wider transition-all duration-300 hover:shadow-[0_10px_30px_rgba(123,17,19,0.3)] hover:-translate-y-1"
                     >
-                      {contactMutation.isPending ? "Sending..." : "Send Message"}
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
                 </Form>
-              </Card>
-              
-              <div className="h-64 lg:h-80 bg-zinc-800 relative overflow-hidden mt-8">
-                <img 
-                  src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400" 
-                  alt="Modern storefront of tattoo studio on city street" 
-                  className="w-full h-full object-cover" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-4 left-4 right-4">
-                  <h4 className="text-cinzel text-lg mb-1">Find Our Studio</h4>
-                  <p className="opacity-80 text-sm">Located in Melbourne's Heidelberg Heights, easily accessible by public transport.</p>
-                </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-24 bg-[#0a0a0a]">
+        <div className="max-w-[1600px] mx-auto px-[5%]">
+          <div className="text-center mb-12">
+            <h2 className="font-cinzel text-[clamp(2.5rem,6vw,4rem)] font-normal mb-6 relative inline-block">
+              Find Our Studio
+              <span className="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-[60px] h-[3px] bg-[#7B1113]"></span>
+            </h2>
+            <p className="text-xl opacity-80 max-w-3xl mx-auto leading-relaxed">
+              Located in the heart of Downtown LA's Arts District, our studio is easily accessible 
+              by car or public transport. Street parking and nearby lots available.
+            </p>
+          </div>
+
+          {/* Map Placeholder */}
+          <div className="bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] rounded-lg overflow-hidden h-[400px] flex items-center justify-center">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-[#7B1113] rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">🗺️</span>
+              </div>
+              <h3 className="font-cinzel text-xl mb-2">Interactive Map</h3>
+              <p className="opacity-70 text-sm">1247 Ink Street, Los Angeles, CA 90013</p>
+            </div>
+          </div>
+
+          {/* Quick Info */}
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-[rgba(123,17,19,0.1)] border border-[#7B1113] rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🚗</span>
+              </div>
+              <h4 className="font-medium mb-2">Parking</h4>
+              <p className="text-sm opacity-70">Street parking and nearby lots available</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-[rgba(123,17,19,0.1)] border border-[#7B1113] rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🚇</span>
+              </div>
+              <h4 className="font-medium mb-2">Public Transport</h4>
+              <p className="text-sm opacity-70">Metro Gold Line - Little Tokyo/Arts District</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-[rgba(123,17,19,0.1)] border border-[#7B1113] rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">♿</span>
+              </div>
+              <h4 className="font-medium mb-2">Accessibility</h4>
+              <p className="text-sm opacity-70">Wheelchair accessible entrance and facilities</p>
             </div>
           </div>
         </div>

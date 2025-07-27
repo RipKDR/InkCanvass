@@ -1,261 +1,507 @@
 import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useToast } from "@/hooks/use-toast";
+import { Link } from "wouter";
+import { queryClient } from "@/lib/queryClient";
 import { apiRequest } from "@/lib/queryClient";
-import { insertBookingSchema } from "@shared/schema";
+import { useToast } from "@/hooks/use-toast";
+import { Skeleton } from "@/components/ui/skeleton";
 import type { Artist } from "@shared/schema";
 
-const bookingFormSchema = insertBookingSchema.extend({
-  styles: z.array(z.string()).min(1, "Please select at least one style"),
+const bookingSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email"),
+  phone: z.string().min(10, "Please enter a valid phone number"),
+  preferredArtist: z.string().optional(),
+  tattooStyle: z.string().min(1, "Please select a tattoo style"),
+  tattooSize: z.string().min(1, "Please select tattoo size"),
+  placement: z.string().min(1, "Please specify placement"),
+  description: z.string().min(10, "Please provide more details about your tattoo idea"),
+  hasAllergies: z.boolean(),
+  allergies: z.string().optional(),
+  hasTattoos: z.boolean(),
+  budget: z.string().min(1, "Please select your budget range"),
+  preferredDate: z.string().min(1, "Please select a preferred date"),
 });
 
-type BookingForm = z.infer<typeof bookingFormSchema>;
-
-const tattooStyles = ["Realism", "Fine Line", "Blackwork", "Traditional", "Color Work", "Geometric"];
+type BookingForm = z.infer<typeof bookingSchema>;
 
 export default function Booking() {
-  const [selectedStyles, setSelectedStyles] = useState<string[]>([]);
+  const [currentStep, setCurrentStep] = useState(1);
   const { toast } = useToast();
-  const queryClient = useQueryClient();
 
-  const { data: artists = [] } = useQuery<Artist[]>({
+  const { data: artists = [], isLoading } = useQuery<Artist[]>({
     queryKey: ['/api/artists'],
   });
 
-  const bookingMutation = useMutation({
-    mutationFn: async (data: BookingForm) => {
-      const response = await apiRequest('POST', '/api/bookings', data);
-      return response.json();
-    },
-    onSuccess: () => {
-      toast({
-        title: "Booking Request Submitted",
-        description: "We'll get back to you within 24 hours to confirm your appointment.",
-      });
-      form.reset();
-      setSelectedStyles([]);
-      queryClient.invalidateQueries({ queryKey: ['/api/bookings'] });
-    },
-    onError: (error) => {
-      toast({
-        title: "Booking Failed",
-        description: "There was an error submitting your booking. Please try again.",
-        variant: "destructive",
-      });
-    },
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors, isValid },
+  } = useForm<BookingForm>({
+    resolver: zodResolver(bookingSchema),
+    mode: "onChange",
+    defaultValues: {
+      hasAllergies: false,
+      hasTattoos: false,
+    }
   });
 
-  const form = useForm<BookingForm>({
-    resolver: zodResolver(bookingFormSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      preferredArtist: undefined,
-      styles: [],
-      description: "",
+  const hasAllergies = watch("hasAllergies");
+  const hasTattoos = watch("hasTattoos");
+
+  const bookingMutation = useMutation({
+    mutationFn: (data: BookingForm) => apiRequest("/api/bookings", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+    onSuccess: () => {
+      toast({
+        title: "Booking Submitted!",
+        description: "We'll contact you within 24 hours to confirm your consultation.",
+      });
+      queryClient.invalidateQueries({ queryKey: ['/api/bookings'] });
+    },
+    onError: () => {
+      toast({
+        variant: "destructive",
+        title: "Booking Failed",
+        description: "Please try again or contact us directly.",
+      });
     },
   });
 
   const onSubmit = (data: BookingForm) => {
-    bookingMutation.mutate({
-      ...data,
-      styles: selectedStyles,
-    });
+    bookingMutation.mutate(data);
   };
 
-  const handleStyleChange = (style: string, checked: boolean) => {
-    if (checked) {
-      setSelectedStyles([...selectedStyles, style]);
-    } else {
-      setSelectedStyles(selectedStyles.filter(s => s !== style));
-    }
-    form.setValue('styles', checked ? [...selectedStyles, style] : selectedStyles.filter(s => s !== style));
+  const nextStep = () => {
+    if (currentStep < 4) setCurrentStep(currentStep + 1);
   };
+
+  const prevStep = () => {
+    if (currentStep > 1) setCurrentStep(currentStep - 1);
+  };
+
+  const totalSteps = 4;
+  const progressPercentage = (currentStep / totalSteps) * 100;
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen pt-32 pb-24">
+        <div className="max-w-4xl mx-auto px-8">
+          <Skeleton className="h-16 w-64 mx-auto mb-6" />
+          <Skeleton className="h-6 w-96 mx-auto mb-12" />
+          <div className="space-y-4">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Skeleton key={i} className="h-12 w-full" />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen pt-32 pb-24">
-      <section className="py-24 bg-zinc-950 relative">
-        <div className="max-w-4xl mx-auto px-8 relative z-10">
-          <div className="text-center mb-16">
-            <h1 className="text-cinzel text-5xl lg:text-6xl mb-6 relative inline-block">
-              Book Your Session
-              <span className="absolute bottom-0 left-0 w-16 h-1 bg-red-800"></span>
-            </h1>
-            <p className="text-xl opacity-80 max-w-2xl mx-auto leading-relaxed">
-              Ready to start your tattoo journey? Fill out our booking form and we'll get back to you within 24 hours.
-            </p>
-          </div>
+    <div className="min-h-screen">
+      {/* Booking Hero */}
+      <section className="pt-40 pb-20 bg-[#0a0a0a] relative overflow-hidden">
+        <div className="absolute top-1/2 -right-20 transform -translate-y-1/2 rotate-90 text-[15rem] opacity-[0.02] font-cinzel tracking-[0.3em] select-none whitespace-nowrap">
+          BOOKING
+        </div>
+        
+        <div className="max-w-[1600px] mx-auto px-[5%] relative z-10 text-center">
+          <h1 className="font-cinzel text-[clamp(3rem,8vw,6rem)] font-normal leading-[0.85] uppercase mb-6">
+            Book Your Session
+          </h1>
+          <p className="text-xl opacity-80 max-w-3xl mx-auto leading-relaxed mb-12">
+            Ready to bring your vision to life? Complete our booking form to schedule your consultation 
+            with one of our master artists. We'll work together to create something extraordinary.
+          </p>
           
-          <Card className="bg-zinc-800/50 border border-zinc-700/50 p-8 lg:p-12">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="firstName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm uppercase tracking-wider opacity-80">First Name</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            className="bg-zinc-800/50 border-zinc-700/50 text-zinc-50 focus:border-red-800 focus:bg-red-800/5 transition-all duration-300"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="lastName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm uppercase tracking-wider opacity-80">Last Name</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            className="bg-zinc-800/50 border-zinc-700/50 text-zinc-50 focus:border-red-800 focus:bg-red-800/5 transition-all duration-300"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+          {/* Process Steps */}
+          <div className="flex justify-center items-center gap-8 pt-12 border-t border-[rgba(242,242,242,0.1)]">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-[#7B1113] text-[#F2F2F2] rounded-full flex items-center justify-center font-cinzel text-lg">1</div>
+              <span className="text-sm uppercase tracking-wider">Consultation</span>
+            </div>
+            <div className="w-16 h-px bg-[rgba(242,242,242,0.2)]"></div>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-[rgba(242,242,242,0.1)] text-[#F2F2F2] rounded-full flex items-center justify-center font-cinzel text-lg">2</div>
+              <span className="text-sm uppercase tracking-wider opacity-60">Design</span>
+            </div>
+            <div className="w-16 h-px bg-[rgba(242,242,242,0.2)]"></div>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-[rgba(242,242,242,0.1)] text-[#F2F2F2] rounded-full flex items-center justify-center font-cinzel text-lg">3</div>
+              <span className="text-sm uppercase tracking-wider opacity-60">Session</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Booking Form */}
+      <section className="py-24 bg-[#111111]">
+        <div className="max-w-4xl mx-auto px-[5%]">
+          {/* Progress Bar */}
+          <div className="mb-12">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="font-cinzel text-2xl">Step {currentStep} of {totalSteps}</h2>
+              <span className="text-sm opacity-60">{Math.round(progressPercentage)}% Complete</span>
+            </div>
+            <div className="w-full bg-[rgba(242,242,242,0.1)] h-2">
+              <div 
+                className="h-2 bg-[#7B1113] transition-all duration-500"
+                style={{ width: `${progressPercentage}%` }}
+              ></div>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            {/* Step 1: Personal Information */}
+            {currentStep === 1 && (
+              <div className="space-y-6">
+                <div className="text-center mb-8">
+                  <h3 className="font-cinzel text-3xl mb-4 text-[#7B1113]">Personal Information</h3>
+                  <p className="opacity-80">Let's start with the basics so we can contact you</p>
                 </div>
-                
+
                 <div className="grid md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm uppercase tracking-wider opacity-80">Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            type="email"
-                            className="bg-zinc-800/50 border-zinc-700/50 text-zinc-50 focus:border-red-800 focus:bg-red-800/5 transition-all duration-300"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm uppercase tracking-wider opacity-80">Phone</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            type="tel"
-                            className="bg-zinc-800/50 border-zinc-700/50 text-zinc-50 focus:border-red-800 focus:bg-red-800/5 transition-all duration-300"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <div>
+                    <label className="block text-sm font-medium opacity-70 uppercase tracking-wider mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      {...register("name")}
+                      type="text"
+                      className="w-full px-4 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm focus:outline-none focus:border-[#7B1113] transition-all duration-300"
+                      placeholder="Enter your full name"
+                    />
+                    {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium opacity-70 uppercase tracking-wider mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      {...register("email")}
+                      type="email"
+                      className="w-full px-4 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm focus:outline-none focus:border-[#7B1113] transition-all duration-300"
+                      placeholder="your@email.com"
+                    />
+                    {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium opacity-70 uppercase tracking-wider mb-2">
+                      Phone Number *
+                    </label>
+                    <input
+                      {...register("phone")}
+                      type="tel"
+                      className="w-full px-4 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm focus:outline-none focus:border-[#7B1113] transition-all duration-300"
+                      placeholder="+61 XXX XXX XXX"
+                    />
+                    {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone.message}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium opacity-70 uppercase tracking-wider mb-2">
+                      Preferred Date
+                    </label>
+                    <input
+                      {...register("preferredDate")}
+                      type="date"
+                      className="w-full px-4 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm focus:outline-none focus:border-[#7B1113] transition-all duration-300"
+                    />
+                    {errors.preferredDate && <p className="text-red-400 text-sm mt-1">{errors.preferredDate.message}</p>}
+                  </div>
                 </div>
-                
-                <FormField
-                  control={form.control}
-                  name="preferredArtist"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm uppercase tracking-wider opacity-80">Preferred Artist</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger className="bg-zinc-800/50 border-zinc-700/50 text-zinc-50 focus:border-red-800 focus:bg-red-800/5 transition-all duration-300">
-                            <SelectValue placeholder="No Preference" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="">No Preference</SelectItem>
-                          {artists.map((artist) => (
-                            <SelectItem key={artist.id} value={artist.id}>
-                              {artist.name} - {artist.specialty}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
+              </div>
+            )}
+
+            {/* Step 2: Tattoo Details */}
+            {currentStep === 2 && (
+              <div className="space-y-6">
+                <div className="text-center mb-8">
+                  <h3 className="font-cinzel text-3xl mb-4 text-[#7B1113]">Tattoo Details</h3>
+                  <p className="opacity-80">Tell us about your tattoo vision</p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium opacity-70 uppercase tracking-wider mb-2">
+                      Preferred Artist
+                    </label>
+                    <select
+                      {...register("preferredArtist")}
+                      className="w-full px-4 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm focus:outline-none focus:border-[#7B1113] transition-all duration-300"
+                    >
+                      <option value="">No preference</option>
+                      {artists.map((artist) => (
+                        <option key={artist.id} value={artist.id}>
+                          {artist.name} - {artist.specialty}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium opacity-70 uppercase tracking-wider mb-2">
+                      Tattoo Style *
+                    </label>
+                    <select
+                      {...register("tattooStyle")}
+                      className="w-full px-4 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm focus:outline-none focus:border-[#7B1113] transition-all duration-300"
+                    >
+                      <option value="">Select a style</option>
+                      <option value="Realism">Realism</option>
+                      <option value="Fine Line">Fine Line</option>
+                      <option value="Blackwork">Blackwork</option>
+                      <option value="Traditional">Traditional</option>
+                      <option value="Neo-Traditional">Neo-Traditional</option>
+                      <option value="Geometric">Geometric</option>
+                    </select>
+                    {errors.tattooStyle && <p className="text-red-400 text-sm mt-1">{errors.tattooStyle.message}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium opacity-70 uppercase tracking-wider mb-2">
+                      Size *
+                    </label>
+                    <select
+                      {...register("tattooSize")}
+                      className="w-full px-4 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm focus:outline-none focus:border-[#7B1113] transition-all duration-300"
+                    >
+                      <option value="">Select size</option>
+                      <option value="Small (2-4 inches)">Small (2-4 inches)</option>
+                      <option value="Medium (4-8 inches)">Medium (4-8 inches)</option>
+                      <option value="Large (8+ inches)">Large (8+ inches)</option>
+                      <option value="Full sleeve/back">Full sleeve/back</option>
+                    </select>
+                    {errors.tattooSize && <p className="text-red-400 text-sm mt-1">{errors.tattooSize.message}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium opacity-70 uppercase tracking-wider mb-2">
+                      Placement *
+                    </label>
+                    <input
+                      {...register("placement")}
+                      type="text"
+                      className="w-full px-4 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm focus:outline-none focus:border-[#7B1113] transition-all duration-300"
+                      placeholder="e.g., forearm, shoulder, back"
+                    />
+                    {errors.placement && <p className="text-red-400 text-sm mt-1">{errors.placement.message}</p>}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium opacity-70 uppercase tracking-wider mb-2">
+                    Description *
+                  </label>
+                  <textarea
+                    {...register("description")}
+                    rows={4}
+                    className="w-full px-4 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm focus:outline-none focus:border-[#7B1113] transition-all duration-300 resize-none"
+                    placeholder="Describe your tattoo idea in detail..."
+                  />
+                  {errors.description && <p className="text-red-400 text-sm mt-1">{errors.description.message}</p>}
+                </div>
+              </div>
+            )}
+
+            {/* Step 3: Health & Experience */}
+            {currentStep === 3 && (
+              <div className="space-y-6">
+                <div className="text-center mb-8">
+                  <h3 className="font-cinzel text-3xl mb-4 text-[#7B1113]">Health & Experience</h3>
+                  <p className="opacity-80">This helps us provide the best care during your session</p>
+                </div>
+
+                <div className="space-y-6">
+                  <div>
+                    <label className="flex items-center gap-3 text-sm">
+                      <input
+                        {...register("hasAllergies")}
+                        type="checkbox"
+                        className="w-4 h-4 text-[#7B1113] bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] focus:ring-[#7B1113]"
+                      />
+                      <span>I have allergies or skin sensitivities</span>
+                    </label>
+                  </div>
+
+                  {hasAllergies && (
+                    <div>
+                      <label className="block text-sm font-medium opacity-70 uppercase tracking-wider mb-2">
+                        Please specify your allergies
+                      </label>
+                      <textarea
+                        {...register("allergies")}
+                        rows={3}
+                        className="w-full px-4 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm focus:outline-none focus:border-[#7B1113] transition-all duration-300 resize-none"
+                        placeholder="List any allergies or skin conditions..."
+                      />
+                    </div>
                   )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="styles"
-                  render={() => (
-                    <FormItem>
-                      <FormLabel className="text-sm uppercase tracking-wider opacity-80">Tattoo Style</FormLabel>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        {tattooStyles.map((style) => (
-                          <div key={style} className="flex items-center space-x-2">
-                            <Checkbox
-                              id={style}
-                              checked={selectedStyles.includes(style)}
-                              onCheckedChange={(checked) => handleStyleChange(style, !!checked)}
-                              className="border-zinc-700/50 data-[state=checked]:bg-red-800 data-[state=checked]:border-red-800"
-                            />
-                            <label htmlFor={style} className="text-sm cursor-pointer">
-                              {style}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                      <FormMessage />
-                    </FormItem>
+
+                  <div>
+                    <label className="flex items-center gap-3 text-sm">
+                      <input
+                        {...register("hasTattoos")}
+                        type="checkbox"
+                        className="w-4 h-4 text-[#7B1113] bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] focus:ring-[#7B1113]"
+                      />
+                      <span>I have previous tattoos</span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium opacity-70 uppercase tracking-wider mb-2">
+                      Budget Range *
+                    </label>
+                    <select
+                      {...register("budget")}
+                      className="w-full px-4 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm focus:outline-none focus:border-[#7B1113] transition-all duration-300"
+                    >
+                      <option value="">Select your budget</option>
+                      <option value="$200-500">$200 - $500</option>
+                      <option value="$500-1000">$500 - $1,000</option>
+                      <option value="$1000-2000">$1,000 - $2,000</option>
+                      <option value="$2000+">$2,000+</option>
+                    </select>
+                    {errors.budget && <p className="text-red-400 text-sm mt-1">{errors.budget.message}</p>}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Step 4: Review & Submit */}
+            {currentStep === 4 && (
+              <div className="space-y-6">
+                <div className="text-center mb-8">
+                  <h3 className="font-cinzel text-3xl mb-4 text-[#7B1113]">Review & Submit</h3>
+                  <p className="opacity-80">Please review your booking details before submitting</p>
+                </div>
+
+                <div className="bg-[rgba(242,242,242,0.02)] border border-[rgba(242,242,242,0.1)] p-6 space-y-4">
+                  <h4 className="font-cinzel text-xl mb-4">Booking Summary</h4>
+                  
+                  <div className="grid md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <span className="opacity-60">Name:</span>
+                      <span className="ml-2">{watch("name")}</span>
+                    </div>
+                    <div>
+                      <span className="opacity-60">Email:</span>
+                      <span className="ml-2">{watch("email")}</span>
+                    </div>
+                    <div>
+                      <span className="opacity-60">Phone:</span>
+                      <span className="ml-2">{watch("phone")}</span>
+                    </div>
+                    <div>
+                      <span className="opacity-60">Preferred Date:</span>
+                      <span className="ml-2">{watch("preferredDate")}</span>
+                    </div>
+                    <div>
+                      <span className="opacity-60">Style:</span>
+                      <span className="ml-2">{watch("tattooStyle")}</span>
+                    </div>
+                    <div>
+                      <span className="opacity-60">Size:</span>
+                      <span className="ml-2">{watch("tattooSize")}</span>
+                    </div>
+                    <div>
+                      <span className="opacity-60">Placement:</span>
+                      <span className="ml-2">{watch("placement")}</span>
+                    </div>
+                    <div>
+                      <span className="opacity-60">Budget:</span>
+                      <span className="ml-2">{watch("budget")}</span>
+                    </div>
+                  </div>
+
+                  {watch("description") && (
+                    <div className="pt-4 border-t border-[rgba(242,242,242,0.1)]">
+                      <span className="opacity-60 block mb-2">Description:</span>
+                      <p className="text-sm leading-relaxed">{watch("description")}</p>
+                    </div>
                   )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm uppercase tracking-wider opacity-80">Design Description</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          {...field}
-                          rows={4}
-                          placeholder="Describe your tattoo idea, placement, size, etc."
-                          className="bg-zinc-800/50 border-zinc-700/50 text-zinc-50 focus:border-red-800 focus:bg-red-800/5 transition-all duration-300 resize-vertical"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <Button
-                  type="submit"
-                  disabled={bookingMutation.isPending}
-                  className="w-full bg-red-800 hover:bg-red-700 py-4 text-lg uppercase tracking-wider hover:shadow-xl hover:shadow-red-800/30 hover:-translate-y-1 transition-all duration-300"
+                </div>
+
+                <div className="bg-[rgba(123,17,19,0.1)] border border-[rgba(123,17,19,0.2)] p-6">
+                  <h4 className="font-medium mb-2 text-[#7B1113]">What happens next?</h4>
+                  <ul className="text-sm space-y-2 opacity-80">
+                    <li>• We'll review your booking and contact you within 24 hours</li>
+                    <li>• A consultation will be scheduled to discuss your design</li>
+                    <li>• Your artist will create a custom design for approval</li>
+                    <li>• We'll schedule your tattoo session once everything is finalized</li>
+                  </ul>
+                </div>
+              </div>
+            )}
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-between pt-8">
+              <button
+                type="button"
+                onClick={prevStep}
+                disabled={currentStep === 1}
+                className="px-8 py-3 border border-[rgba(242,242,242,0.2)] text-[#F2F2F2] text-sm uppercase tracking-wider transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:border-[#7B1113]"
+              >
+                Previous
+              </button>
+
+              {currentStep < 4 ? (
+                <button
+                  type="button"
+                  onClick={nextStep}
+                  className="px-8 py-3 bg-[#7B1113] hover:bg-[#a01619] text-[#F2F2F2] text-sm uppercase tracking-wider transition-all duration-300"
                 >
-                  {bookingMutation.isPending ? "Submitting..." : "Submit Booking Request"}
-                </Button>
-              </form>
-            </Form>
-          </Card>
+                  Next Step
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={!isValid || bookingMutation.isPending}
+                  className="px-8 py-3 bg-[#7B1113] hover:bg-[#a01619] text-[#F2F2F2] text-sm uppercase tracking-wider transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {bookingMutation.isPending ? "Submitting..." : "Submit Booking"}
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
+      </section>
+
+      {/* Contact Info */}
+      <section className="py-16 bg-[#0a0a0a] text-center">
+        <div className="max-w-4xl mx-auto px-[5%]">
+          <h3 className="font-cinzel text-2xl mb-6">Prefer to call or visit?</h3>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+            <div>
+              <div className="text-[#7B1113] font-cinzel text-xl mb-2">Phone</div>
+              <div className="text-lg">+61 478 128 212</div>
+            </div>
+            <div className="w-px h-12 bg-[rgba(242,242,242,0.2)] hidden md:block"></div>
+            <div>
+              <div className="text-[#7B1113] font-cinzel text-xl mb-2">Studio</div>
+              <div className="text-lg">33 Southern Road<br />Heidelberg Heights, VIC 3081</div>
+            </div>
+            <div className="w-px h-12 bg-[rgba(242,242,242,0.2)] hidden md:block"></div>
+            <div>
+              <Link href="/contact">
+                <button className="border border-[#7B1113] text-[#7B1113] hover:bg-[#7B1113] hover:text-[#F2F2F2] px-6 py-3 text-sm uppercase tracking-wider transition-all duration-300">
+                  Contact Form
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>

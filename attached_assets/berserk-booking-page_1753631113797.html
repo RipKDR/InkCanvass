@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Tattoo - Berserk Tattoos | Melbourne</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #111111;
+            color: #F2F2F2;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        /* Film Grain Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px),
+                repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0,0,0,.05) 2px, rgba(0,0,0,.05) 4px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.5;
+        }
+        
+        /* Typography */
+        h1 { 
+            font-family: 'Cinzel', serif; 
+            font-size: clamp(3rem, 8vw, 6rem); 
+            font-weight: 400; 
+            letter-spacing: -0.02em; 
+            line-height: 0.85;
+            text-transform: uppercase;
+        }
+        h2 { 
+            font-family: 'Cinzel', serif; 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            font-weight: 400; 
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #7B1113;
+        }
+        h3 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; }
+        h4 { font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300; opacity: 0.8; line-height: 1.6; }
+        
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            z-index: 50;
+            padding: 1.5rem 5%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(123, 17, 19, 0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.75rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            color: #F2F2F2;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #F2F2F2;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #7B1113;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        /* Booking Hero */
+        .booking-hero {
+            padding: 10rem 5% 5rem;
+            background: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .booking-hero::before {
+            content: 'BOOK';
+            position: absolute;
+            top: 50%;
+            right: -5%;
+            transform: translateY(-50%) rotate(90deg);
+            font-size: 20rem;
+            font-family: 'Cinzel', serif;
+            opacity: 0.02;
+            letter-spacing: 0.5em;
+        }
+        
+        .hero-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content h1 {
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .booking-steps {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .step:nth-child(1) { animation-delay: 0.3s; }
+        .step:nth-child(2) { animation-delay: 0.4s; }
+        .step:nth-child(3) { animation-delay: 0.5s; }
+        .step:nth-child(4) { animation-delay: 0.6s; }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #7B1113;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: #7B1113;
+        }
+        
+        .step-text {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .step-connector {
+            width: 40px;
+            height: 2px;
+            background: rgba(123, 17, 19, 0.3);
+            margin: 0 -1rem;
+        }
+        
+        /* Main Booking Section */
+        .booking-main {
+            padding: 5rem 5%;
+            background: #111111;
+            position: relative;
+        }
+        
+        .booking-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+        }
+        
+        /* Artist Selection */
+        .artist-selection {
+            margin-bottom: 4rem;
+        }
+        
+        .artist-selection h3 {
+            margin-bottom: 2rem;
+        }
+        
+        .artist-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .artist-card {
+            background: rgba(242, 242, 242, 0.02);
+            border: 2px solid rgba(242, 242, 242, 0.1);
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .artist-card:hover,
+        .artist-card.selected {
+            border-color: #7B1113;
+            transform: translateY(-5px);
+            background: rgba(123, 17, 19, 0.05);
+        }
+        
+        .artist-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 30px;
+            height: 30px;
+            background: #7B1113;
+            color: #F2F2F2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .artist-avatar {
+            width: 100px;
+            height: 100px;
+            background: #333;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .artist-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            opacity: 1;
+        }
+        
+        .artist-specialty {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+        }
+        
+        .artist-availability {
+            font-size: 0.85rem;
+            color: #7B1113;
+        }
+        
+        /* Booking Form */
+        .booking-form {
+            background: rgba(242, 242, 242, 0.02);
+            border: 1px solid rgba(242, 242, 242, 0.1);
+            padding: 3rem;
+        }
+        
+        .form-section {
+            margin-bottom: 3rem;
+        }
+        
+        .form-section h4 {
+            margin-bottom: 1.5rem;
+            opacity: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(242, 242, 242, 0.05);
+            border: 1px solid rgba(242, 242, 242, 0.2);
+            color: #F2F2F2;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #7B1113;
+            background: rgba(123, 17, 19, 0.05);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .style-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .style-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .style-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #7B1113;
+        }
+        
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-upload-label {
+            display: block;
+            padding: 2rem;
+            background: rgba(123, 17, 19, 0.05);
+            border: 2px dashed rgba(123, 17, 19, 0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload:hover .file-upload-label {
+            border-color: #7B1113;
+            background: rgba(123, 17, 19, 0.1);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 1.5rem;
+            background: #7B1113;
+            border: none;
+            color: #F2F2F2;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(123, 17, 19, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Sidebar */
+        .booking-sidebar {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+        
+        .sidebar-card {
+            background: rgba(123, 17, 19, 0.05);
+            border: 1px solid rgba(123, 17, 19, 0.2);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-card h4 {
+            margin-bottom: 1.5rem;
+            opacity: 1;
+        }
+        
+        .price-estimate {
+            font-size: 3rem;
+            font-family: 'Cinzel', serif;
+            color: #7B1113;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-note {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-card ul {
+            list-style: none;
+        }
+        
+        .sidebar-card li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(242, 242, 242, 0.1);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .sidebar-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .highlight {
+            color: #7B1113;
+            font-weight: 500;
+        }
+        
+        /* Calendar Section */
+        .calendar-section {
+            padding: 5rem 5%;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .calendar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+        
+        .month-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .month-btn {
+            padding: 0.5rem 1rem;
+            background: none;
+            border: 1px solid rgba(242, 242, 242, 0.2);
+            color: #F2F2F2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .month-btn:hover {
+            border-color: #7B1113;
+            color: #7B1113;
+        }
+        
+        .current-month {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: rgba(242, 242, 242, 0.1);
+            padding: 1px;
+        }
+        
+        .calendar-day {
+            background: #111111;
+            padding: 1rem;
+            min-height: 100px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-day.available {
+            cursor: pointer;
+        }
+        
+        .calendar-day.available:hover {
+            background: rgba(123, 17, 19, 0.1);
+        }
+        
+        .calendar-day.selected {
+            background: #7B1113;
+        }
+        
+        .calendar-day.unavailable {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .day-number {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .day-slots {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+        
+        .time-slots {
+            margin-top: 3rem;
+            display: none;
+        }
+        
+        .time-slots.active {
+            display: block;
+        }
+        
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .time-slot {
+            padding: 1rem;
+            background: rgba(242, 242, 242, 0.05);
+            border: 1px solid rgba(242, 242, 242, 0.2);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .time-slot:hover {
+            border-color: #7B1113;
+            background: rgba(123, 17, 19, 0.1);
+        }
+        
+        .time-slot.selected {
+            background: #7B1113;
+            border-color: #7B1113;
+        }
+        
+        .time-slot.unavailable {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 5%;
+            background: #111111;
+            border-top: 1px solid rgba(123, 17, 19, 0.2);
+        }
+        
+        .contact-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .contact-card {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid rgba(242, 242, 242, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            border-color: #7B1113;
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 3rem;
+            color: #7B1113;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-card h4 {
+            margin-bottom: 1rem;
+            opacity: 1;
+        }
+        
+        .contact-card p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .contact-card a {
+            color: #7B1113;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .contact-card a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Policy Section */
+        .policy-section {
+            padding: 5rem 5%;
+            background: #0a0a0a;
+        }
+        
+        .policy-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .policy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .policy-card {
+            padding: 2rem;
+            background: rgba(242, 242, 242, 0.02);
+            border: 1px solid rgba(242, 242, 242, 0.1);
+        }
+        
+        .policy-card h4 {
+            margin-bottom: 1.5rem;
+            color: #7B1113;
+            opacity: 1;
+        }
+        
+        .policy-card ul {
+            list-style: none;
+        }
+        
+        .policy-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .policy-card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #7B1113;
+        }
+        
+        /* Live Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+        
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            background: #7B1113;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(123, 17, 19, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(123, 17, 19, 0.4);
+        }
+        
+        .chat-button::before {
+            content: '💬';
+            font-size: 1.5rem;
+        }
+        
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: #111111;
+            border: 1px solid rgba(123, 17, 19, 0.2);
+            border-radius: 10px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .chat-window.active {
+            display: flex;
+        }
+        
+        .chat-header {
+            padding: 1.5rem;
+            background: #7B1113;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header h5 {
+            font-size: 1rem;
+            margin: 0;
+        }
+        
+        .chat-close {
+            cursor: pointer;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .chat-close:hover {
+            opacity: 1;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .chat-input {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(242, 242, 242, 0.1);
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem;
+            background: rgba(242, 242, 242, 0.05);
+            border: 1px solid rgba(242, 242, 242, 0.2);
+            color: #F2F2F2;
+            font-size: 0.9rem;
+        }
+        
+        .chat-input button {
+            padding: 0.75rem 1.5rem;
+            background: #7B1113;
+            border: none;
+            color: #F2F2F2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-input button:hover {
+            background: #9B1517;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 5rem 5% 3rem;
+            background: #111111;
+            border-top: 1px solid rgba(123, 17, 19, 0.2);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .mobile-menu span {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #F2F2F2;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu span:nth-child(1) { top: 0; }
+        .mobile-menu span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .mobile-menu span:nth-child(3) { bottom: 0; }
+        
+        /* Success Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #111111;
+            border: 1px solid rgba(123, 17, 19, 0.2);
+            padding: 3rem;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .modal-icon {
+            font-size: 4rem;
+            color: #7B1113;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-content h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .modal-content p {
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-close {
+            padding: 1rem 2rem;
+            background: #7B1113;
+            border: none;
+            color: #F2F2F2;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: #9B1517;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .artist-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-sidebar {
+                position: static;
+                margin-top: 3rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .policy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .booking-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .step-connector {
+                display: none;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-grid {
+                font-size: 0.85rem;
+            }
+            
+            .calendar-day {
+                min-height: 80px;
+                padding: 0.5rem;
+            }
+            
+            .time-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .chat-window {
+                width: 100%;
+                right: -2rem;
+                left: -2rem;
+                bottom: 70px;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="index.html" class="logo">BERSERK</a>
+            <div class="nav-links">
+                <a href="index.html#artists">ARTISTS</a>
+                <a href="gallery.html">GALLERY</a>
+                <a href="#" class="active">BOOKING</a>
+                <a href="about.html">ABOUT</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- Booking Hero -->
+    <section class="booking-hero">
+        <div class="hero-content">
+            <h1>BEGIN YOUR JOURNEY</h1>
+            <p>Transform your vision into permanent art. Our streamlined booking process ensures your experience is as exceptional as the tattoo you'll wear forever.</p>
+            <div class="booking-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Choose Artist</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Submit Details</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Select Date</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-text">Confirm Booking</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Booking Section -->
+    <section class="booking-main">
+        <div class="booking-container">
+            <div class="booking-form-container">
+                <!-- Artist Selection -->
+                <div class="artist-selection">
+                    <h3>SELECT YOUR ARTIST</h3>
+                    <div class="artist-cards">
+                        <div class="artist-card" data-artist="amelia">
+                            <div class="artist-avatar"></div>
+                            <h4>Amelia Kelso</h4>
+                            <p class="artist-specialty">Fine Line & Intricate Detail</p>
+                            <p class="artist-availability">Next available: 2 weeks</p>
+                        </div>
+                        <div class="artist-card" data-artist="ben">
+                            <div class="artist-avatar"></div>
+                            <h4>Ben White Raven</h4>
+                            <p class="artist-specialty">Realism & Visual Storytelling</p>
+                            <p class="artist-availability">Next available: 3 weeks</p>
+                        </div>
+                        <div class="artist-card" data-artist="monique">
+                            <div class="artist-avatar"></div>
+                            <h4>Monique Moore</h4>
+                            <p class="artist-specialty">Bold Expression & Dark Aesthetic</p>
+                            <p class="artist-availability">Next available: 1 week</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Booking Form -->
+                <form class="booking-form">
+                    <div class="form-section">
+                        <h4>PERSONAL INFORMATION</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name *</label>
+                                <input type="text" id="first-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name *</label>
+                                <input type="text" id="last-name" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="age-confirm">
+                                <input type="checkbox" id="age-confirm" required>
+                                I confirm I am 18 years or older *
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h4>TATTOO DETAILS</h4>
+                        <div class="form-group">
+                            <label for="placement">Placement on Body *</label>
+                            <input type="text" id="placement" placeholder="e.g., Upper arm, back, chest" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="size">Approximate Size *</label>
+                                <select id="size" required>
+                                    <option value="">Select size</option>
+                                    <option value="small">Small (2-4 inches)</option>
+                                    <option value="medium">Medium (4-8 inches)</option>
+                                    <option value="large">Large (8-12 inches)</option>
+                                    <option value="xlarge">Extra Large (12+ inches)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="color">Color Preference *</label>
+                                <select id="color" required>
+                                    <option value="">Select preference</option>
+                                    <option value="black">Black & Grey</option>
+                                    <option value="color">Full Color</option>
+                                    <option value="mixed">Mixed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Style Preferences (select all that apply)</label>
+                            <div class="style-options">
+                                <label class="style-checkbox">
+                                    <input type="checkbox" name="style" value="fine-line">
+                                    <span>Fine Line</span>
+                                </label>
+                                <label class="style-checkbox">
+                                    <input type="checkbox" name="style" value="realism">
+                                    <span>Realism</span>
+                                </label>
+                                <label class="style-checkbox">
+                                    <input type="checkbox" name="style" value="blackwork">
+                                    <span>Blackwork</span>
+                                </label>
+                                <label class="style-checkbox">
+                                    <input type="checkbox" name="style" value="geometric">
+                                    <span>Geometric</span>
+                                </label>
+                                <label class="style-checkbox">
+                                    <input type="checkbox" name="style" value="traditional">
+                                    <span>Traditional</span>
+                                </label>
+                                <label class="style-checkbox">
+                                    <input type="checkbox" name="style" value="custom">
+                                    <span>Custom Design</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Describe Your Vision *</label>
+                            <textarea id="description" placeholder="Tell us about your tattoo idea, inspiration, and any specific details you envision..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Reference Images (optional)</label>
+                            <div class="file-upload">
+                                <input type="file" id="references" multiple accept="image/*">
+                                <label for="references" class="file-upload-label">
+                                    <span>📎 Click to upload images</span><br>
+                                    <small>Max 5 files, 10MB each</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h4>ADDITIONAL INFORMATION</h4>
+                        <div class="form-group">
+                            <label for="budget">Budget Range</label>
+                            <select id="budget">
+                                <option value="">Select budget</option>
+                                <option value="500-1000">$500 - $1,000</option>
+                                <option value="1000-2500">$1,000 - $2,500</option>
+                                <option value="2500-5000">$2,500 - $5,000</option>
+                                <option value="5000+">$5,000+</option>
+                                <option value="discuss">Prefer to discuss</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeline">Preferred Timeline</label>
+                            <select id="timeline">
+                                <option value="">Select timeline</option>
+                                <option value="asap">As soon as possible</option>
+                                <option value="1month">Within 1 month</option>
+                                <option value="2months">Within 2 months</option>
+                                <option value="3months">Within 3 months</option>
+                                <option value="flexible">I'm flexible</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Previous Tattoo Experience</label>
+                            <select id="experience">
+                                <option value="">Select experience</option>
+                                <option value="first">This is my first tattoo</option>
+                                <option value="few">I have 1-3 tattoos</option>
+                                <option value="several">I have 4-10 tattoos</option>
+                                <option value="many">I have 10+ tattoos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Additional Notes</label>
+                            <textarea id="notes" placeholder="Any health conditions, allergies, or special requests we should know about?"></textarea>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">SUBMIT BOOKING REQUEST</button>
+                </form>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="booking-sidebar">
+                <div class="sidebar-card">
+                    <h4>BOOKING SUMMARY</h4>
+                    <div class="price-estimate">$0</div>
+                    <p class="price-note">Estimated price range</p>
+                    <ul>
+                        <li>
+                            <span>Selected Artist:</span>
+                            <span class="highlight">Not selected</span>
+                        </li>
+                        <li>
+                            <span>Size:</span>
+                            <span>Not specified</span>
+                        </li>
+                        <li>
+                            <span>Style:</span>
+                            <span>Not specified</span>
+                        </li>
+                        <li>
+                            <span>Consultation Fee:</span>
+                            <span>$50*</span>
+                        </li>
+                    </ul>
+                    <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 1rem;">*Consultation fee credited toward final tattoo price</p>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h4>WHAT HAPPENS NEXT?</h4>
+                    <ol style="list-style: none; font-size: 0.9rem; line-height: 2;">
+                        <li>1. We review your request within 24 hours</li>
+                        <li>2. Artist reviews your concept</li>
+                        <li>3. We contact you to schedule consultation</li>
+                        <li>4. Pay deposit to confirm appointment</li>
+                        <li>5. Meet your artist and finalize design</li>
+                    </ol>
+                </div>
+                
+                <div class="sidebar-card" style="background: rgba(123, 17, 19, 0.1); border-color: #7B1113;">
+                    <h4 style="color: #7B1113;">NEED HELP?</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Our team is here to assist you with your booking.</p>
+                    <p style="font-size: 0.9rem;"><strong>Call:</strong> 0478 128 212</p>
+                    <p style="font-size: 0.9rem;"><strong>Email:</strong> berserk.tattoos.au@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Calendar Section -->
+    <section class="calendar-section">
+        <div class="calendar-container">
+            <h2>AVAILABILITY CALENDAR</h2>
+            <div class="calendar-header">
+                <h3>Select Your Preferred Date</h3>
+                <div class="month-nav">
+                    <button class="month-btn">←</button>
+                    <span class="current-month">JUNE 2025</span>
+                    <button class="month-btn">→</button>
+                </div>
+            </div>
+            <div class="calendar-grid">
+                <!-- Calendar days would be dynamically generated -->
+                <div class="calendar-day unavailable"><div class="day-number">1</div></div>
+                <div class="calendar-day unavailable"><div class="day-number">2</div></div>
+                <div class="calendar-day available">
+                    <div class="day-number">3</div>
+                    <div class="day-slots">2 slots</div>
+                </div>
+                <div class="calendar-day available">
+                    <div class="day-number">4</div>
+                    <div class="day-slots">1 slot</div>
+                </div>
+                <div class="calendar-day unavailable"><div class="day-number">5</div></div>
+                <div class="calendar-day unavailable"><div class="day-number">6</div></div>
+                <div class="calendar-day available">
+                    <div class="day-number">7</div>
+                    <div class="day-slots">3 slots</div>
+                </div>
+                <!-- Continue for full month -->
+            </div>
+            <div class="time-slots">
+                <h4>Available Times for Selected Date</h4>
+                <div class="time-grid">
+                    <div class="time-slot">9:00 AM</div>
+                    <div class="time-slot unavailable">10:00 AM</div>
+                    <div class="time-slot">11:00 AM</div>
+                    <div class="time-slot">12:00 PM</div>
+                    <div class="time-slot unavailable">1:00 PM</div>
+                    <div class="time-slot">2:00 PM</div>
+                    <div class="time-slot">3:00 PM</div>
+                    <div class="time-slot unavailable">4:00 PM</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <h2>GET IN TOUCH</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h4>VISIT THE STUDIO</h4>
+                    <p>
+                        33 Southern Road<br>
+                        Heidelberg Heights, VIC 3081<br>
+                        Melbourne, Australia
+                    </p>
+                    <a href="https://maps.google.com" target="_blank">Get Directions →</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h4>CALL US</h4>
+                    <p>
+                        Studio: <a href="tel:0478128212">0478 128 212</a><br>
+                        Mon-Sun: 12:00 PM - 7:00 PM<br>
+                        (Closed Tuesdays at 5:00 PM)
+                    </p>
+                    <a href="tel:0478128212">Call Now →</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h4>EMAIL US</h4>
+                    <p>
+                        General Inquiries:<br>
+                        <a href="mailto:berserk.tattoos.au@gmail.com">berserk.tattoos.au@gmail.com</a><br>
+                        Response within 24 hours
+                    </p>
+                    <a href="mailto:berserk.tattoos.au@gmail.com">Send Email →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Policy Section -->
+    <section class="policy-section">
+        <div class="policy-container">
+            <h2>BOOKING POLICIES</h2>
+            <div class="policy-grid">
+                <div class="policy-card">
+                    <h4>DEPOSIT & PAYMENT</h4>
+                    <ul>
+                        <li>30% deposit required to secure appointment</li>
+                        <li>Deposits are non-refundable but transferable</li>
+                        <li>Final payment due on day of appointment</li>
+                        <li>Payment plans available for large projects</li>
+                        <li>Accepted: Cash, Card, Bank Transfer</li>
+                    </ul>
+                </div>
+                <div class="policy-card">
+                    <h4>CANCELLATION POLICY</h4>
+                    <ul>
+                        <li>48 hours notice required for rescheduling</li>
+                        <li>Less than 48 hours forfeits deposit</li>
+                        <li>No-shows forfeit deposit and booking privileges</li>
+                        <li>Emergencies handled case-by-case</li>
+                        <li>Maximum 2 reschedules per booking</li>
+                    </ul>
+                </div>
+                <div class="policy-card">
+                    <h4>HEALTH & SAFETY</h4>
+                    <ul>
+                        <li>Valid ID required (18+ only)</li>
+                        <li>No tattoos if pregnant or nursing</li>
+                        <li>Disclose all medical conditions</li>
+                        <li>No alcohol/drugs 24 hours before</li>
+                        <li>Arrive well-rested and fed</li>
+                    </ul>
+                </div>
+                <div class="policy-card">
+                    <h4>AFTERCARE INCLUDED</h4>
+                    <ul>
+                        <li>Premium aftercare kit provided</li>
+                        <li>Detailed care instructions</li>
+                        <li>Follow-up check-in after 2 weeks</li>
+                        <li>Touch-ups included if needed</li>
+                        <li>24/7 aftercare support line</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Live Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-button"></div>
+        <div class="chat-window">
+            <div class="chat-header">
+                <h5>Chat with Berserk</h5>
+                <span class="chat-close">×</span>
+            </div>
+            <div class="chat-messages">
+                <p style="opacity: 0.6; text-align: center; margin-top: 2rem;">How can we help you today?</p>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message...">
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Modal -->
+    <div class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">✓</div>
+            <h3>BOOKING REQUEST SUBMITTED</h3>
+            <p>Thank you for your booking request. We'll review your submission and contact you within 24 hours to schedule your consultation.</p>
+            <p style="font-size: 0.9rem; opacity: 0.6;">Check your email for confirmation and next steps.</p>
+            <button class="modal-close">CLOSE</button>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div style="text-align: center; opacity: 0.5;">
+            © 2025 Berserk Tattoos. All Rights Reserved.
+        </div>
+    </footer>
+    
+    <script>
+        // Artist Selection
+        document.querySelectorAll('.artist-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.artist-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                updateBookingSummary();
+            });
+        });
+        
+        // Update Booking Summary
+        function updateBookingSummary() {
+            const selectedArtist = document.querySelector('.artist-card.selected');
+            const size = document.getElementById('size').value;
+            
+            if (selectedArtist) {
+                const artistName = selectedArtist.querySelector('h4').textContent;
+                document.querySelector('.booking-sidebar .highlight').textContent = artistName;
+            }
+            
+            // Update price estimate based on selections
+            let basePrice = 0;
+            if (size === 'small') basePrice = 500;
+            else if (size === 'medium') basePrice = 1000;
+            else if (size === 'large') basePrice = 2500;
+            else if (size === 'xlarge') basePrice = 5000;
+            
+            if (basePrice > 0) {
+                document.querySelector('.price-estimate').textContent = `$${basePrice} - $${basePrice * 1.5}`;
+            }
+        }
+        
+        // Form listeners
+        document.getElementById('size').addEventListener('change', updateBookingSummary);
+        
+        // Calendar functionality
+        document.querySelectorAll('.calendar-day.available').forEach(day => {
+            day.addEventListener('click', function() {
+                document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+                this.classList.add('selected');
+                document.querySelector('.time-slots').classList.add('active');
+            });
+        });
+        
+        // Time slot selection
+        document.querySelectorAll('.time-slot:not(.unavailable)').forEach(slot => {
+            slot.addEventListener('click', function() {
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+        
+        // Chat widget
+        const chatButton = document.querySelector('.chat-button');
+        const chatWindow = document.querySelector('.chat-window');
+        const chatClose = document.querySelector('.chat-close');
+        
+        chatButton.addEventListener('click', function() {
+            chatWindow.classList.toggle('active');
+        });
+        
+        chatClose.addEventListener('click', function() {
+            chatWindow.classList.remove('active');
+        });
+        
+        // Form submission
+        document.querySelector('.booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success modal
+            document.querySelector('.modal').classList.add('active');
+        });
+        
+        // Modal close
+        document.querySelector('.modal-close').addEventListener('click', function() {
+            document.querySelector('.modal').classList.remove('active');
+        });
+        
+        // File upload preview
+        document.getElementById('references').addEventListener('change', function(e) {
+            const fileCount = e.target.files.length;
+            const label = document.querySelector('.file-upload-label span');
+            if (fileCount > 0) {
+                label.textContent = `📎 ${fileCount} file(s) selected`;
+            }
+        });
+        
+        // Price calculator based on multiple factors
+        function calculatePrice() {
+            const size = document.getElementById('size').value;
+            const color = document.getElementById('color').value;
+            const styles = document.querySelectorAll('input[name="style"]:checked');
+            
+            let basePrice = 0;
+            
+            // Size pricing
+            switch(size) {
+                case 'small': basePrice = 500; break;
+                case 'medium': basePrice = 1000; break;
+                case 'large': basePrice = 2500; break;
+                case 'xlarge': basePrice = 5000; break;
+            }
+            
+            // Color modifier
+            if (color === 'color') basePrice *= 1.3;
+            else if (color === 'mixed') basePrice *= 1.15;
+            
+            // Style complexity
+            if (styles.length > 2) basePrice *= 1.2;
+            
+            return basePrice;
+        }
+        
+        // Update all form fields
+        document.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('change', function() {
+                updateBookingSummary();
+                
+                // Update sidebar with current selections
+                const size = document.getElementById('size');
+                const sizeText = size.options[size.selectedIndex]?.text || 'Not specified';
+                document.querySelector('.booking-sidebar li:nth-child(2) span:last-child').textContent = sizeText;
+                
+                const styles = Array.from(document.querySelectorAll('input[name="style"]:checked'))
+                    .map(s => s.nextElementSibling.textContent).join(', ') || 'Not specified';
+                document.querySelector('.booking-sidebar li:nth-child(3) span:last-child').textContent = styles;
+            });
+        });
+    </script>
+</body>
+</html>
