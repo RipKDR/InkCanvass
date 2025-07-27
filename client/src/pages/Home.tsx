@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import type { Artist, GalleryItem } from "@shared/schema";
 
@@ -19,62 +17,81 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center bg-zinc-950 relative overflow-hidden">
-        <div className="hero-bg-text absolute top-1/2 right-0 transform -translate-y-1/2 rotate-90 select-none">
-          TATTOO
+      <section className="min-h-screen relative overflow-hidden bg-[#0a0a0a]">
+        {/* Background Text */}
+        <div className="absolute top-1/2 -right-10 transform -translate-y-1/2 rotate-90 text-[15rem] opacity-[0.02] font-cinzel tracking-[0.3em] select-none whitespace-nowrap">
+          BERSERK
         </div>
         
-        <div className="max-w-7xl mx-auto px-8 relative z-10 pt-20">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        {/* Background Grid */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(rgba(123, 17, 19, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(123, 17, 19, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}></div>
+        </div>
+
+        <div className="relative z-10 min-h-screen flex items-center justify-center px-[5%]">
+          <div className="max-w-[1600px] w-full mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            {/* Hero Content */}
             <div className="text-center lg:text-left">
-              <h1 className="text-cinzel text-6xl lg:text-8xl xl:text-9xl font-normal leading-none uppercase mb-6 animate-fade-in-up">
-                <span className="block text-zinc-50">Ink</span>
-                <span className="block text-red-800 ml-8 lg:ml-16">Your</span>
-                <span className="block text-zinc-50">Story</span>
+              <h1 className="font-cinzel text-[clamp(3.5rem,10vw,8rem)] font-normal leading-[0.85] uppercase mb-6">
+                <span className="block text-[#F2F2F2]">WHERE</span>
+                <span className="block text-[#7B1113]">REBELLION</span>
+                <span className="block text-[#F2F2F2]">MEETS</span>
+                <span className="block text-[#7B1113]">REFINEMENT</span>
               </h1>
               
-              <p className="text-xl lg:text-2xl mb-8 opacity-80 max-w-2xl leading-relaxed animate-fade-in-up" style={{animationDelay: '0.2s'}}>
-                Melbourne's most respected tattoo studio, where artistry meets precision. Home to master artists specializing in realism, fine line, and blackwork.
+              <p className="text-xl lg:text-2xl mb-8 opacity-80 leading-relaxed">
+                Melbourne's premier tattoo studio, where exceptional artistry meets uncompromising craftsmanship. 
+                Home to award-winning artists specializing in fine line, realism, and bold blackwork.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start animate-fade-in-up" style={{animationDelay: '0.4s'}}>
+              <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start mb-8">
                 <Link href="/gallery">
-                  <Button className="bg-red-800 hover:bg-red-700 px-10 py-4 text-lg uppercase tracking-wider hover:shadow-xl hover:shadow-red-800/30 hover:-translate-y-1 transition-all duration-300">
-                    View Gallery
-                  </Button>
+                  <button className="bg-[#7B1113] hover:bg-[#a01619] text-[#F2F2F2] px-10 py-4 text-lg uppercase tracking-wider transition-all duration-300 hover:shadow-[0_10px_30px_rgba(123,17,19,0.3)] hover:-translate-y-1">
+                    Explore Gallery
+                  </button>
                 </Link>
                 <Link href="/artists">
-                  <Button variant="outline" className="border-zinc-50/20 hover:border-red-800 hover:text-red-800 px-10 py-4 text-lg uppercase tracking-wider transition-all duration-300">
+                  <button className="border border-[rgba(242,242,242,0.2)] hover:border-[#7B1113] hover:text-[#7B1113] text-[#F2F2F2] px-10 py-4 text-lg uppercase tracking-wider transition-all duration-300">
                     Meet Artists
-                  </Button>
+                  </button>
                 </Link>
+              </div>
+
+              {/* Studio Stats */}
+              <div className="flex justify-center lg:justify-start gap-12 pt-8 border-t border-[rgba(242,242,242,0.1)]">
+                <div className="text-center">
+                  <div className="font-cinzel text-3xl text-[#7B1113]">15+</div>
+                  <div className="text-sm opacity-60 uppercase tracking-wider">Years</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-cinzel text-3xl text-[#7B1113]">{artists.length}</div>
+                  <div className="text-sm opacity-60 uppercase tracking-wider">Artists</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-cinzel text-3xl text-[#7B1113]">1000+</div>
+                  <div className="text-sm opacity-60 uppercase tracking-wider">Pieces</div>
+                </div>
               </div>
             </div>
             
+            {/* Hero Image */}
             <div className="relative">
-              <div className="w-full h-96 lg:h-[600px] bg-zinc-800 relative overflow-hidden transform rotate-2 shadow-2xl">
+              <div className="w-full h-[600px] bg-gradient-to-br from-[#1a1a1a] to-[#222] relative overflow-hidden transform rotate-2">
                 <img 
                   src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-                  alt="Modern tattoo studio interior with professional equipment" 
-                  className="w-full h-full object-cover" 
+                  alt="Professional tattoo studio interior" 
+                  className="w-full h-full object-cover opacity-80" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-              </div>
-              
-              <div className="absolute -bottom-8 -left-8 bg-zinc-950/90 backdrop-blur-sm border border-red-900/20 p-6">
-                <div className="flex space-x-8">
-                  <div className="text-center">
-                    <div className="text-cinzel text-3xl text-red-800">15+</div>
-                    <div className="text-sm opacity-60 uppercase tracking-wider">Years</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-cinzel text-3xl text-red-800">{artists.length}</div>
-                    <div className="text-sm opacity-60 uppercase tracking-wider">Artists</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-cinzel text-3xl text-red-800">1K+</div>
-                    <div className="text-sm opacity-60 uppercase tracking-wider">Pieces</div>
-                  </div>
+                <div className="absolute bottom-8 left-8 right-8">
+                  <h3 className="font-cinzel text-2xl mb-2">Professional Studio</h3>
+                  <p className="opacity-80">State-of-the-art equipment in a sterile, comfortable environment</p>
                 </div>
               </div>
             </div>
@@ -84,77 +101,85 @@ export default function Home() {
         <ScrollIndicator />
       </section>
 
-      {/* Gallery Preview */}
-      <section className="py-24 bg-zinc-950 relative">
-        <div className="hero-bg-text absolute top-1/4 left-0 transform -rotate-90 select-none">
+      {/* Featured Work Section */}
+      <section className="py-24 bg-[#111111] relative">
+        <div className="absolute top-1/4 -left-20 transform -rotate-90 text-[15rem] opacity-[0.02] font-cinzel tracking-[0.3em] select-none whitespace-nowrap">
           GALLERY
         </div>
         
-        <div className="max-w-7xl mx-auto px-8 relative z-10">
+        <div className="max-w-[1600px] mx-auto px-[5%] relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-cinzel text-5xl lg:text-6xl mb-6 relative inline-block">
-              Our Work
-              <span className="absolute bottom-0 left-0 w-16 h-1 bg-red-800"></span>
+            <h2 className="font-cinzel text-[clamp(2.5rem,6vw,4rem)] font-normal mb-6 relative inline-block">
+              Featured Work
+              <span className="absolute bottom-[-0.5rem] left-0 w-[60px] h-[3px] bg-[#7B1113]"></span>
             </h2>
             <p className="text-xl opacity-80 max-w-3xl mx-auto leading-relaxed">
-              A showcase of our finest tattoo artistry across multiple styles and techniques, 
-              each piece telling a unique story through ink.
+              A curated selection of our most exceptional pieces, showcasing the diverse styles and 
+              extraordinary skill of our master artists.
             </p>
           </div>
           
-          <div className="gallery-masonry">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {featuredItems.map((item) => (
-              <Card key={item.id} className="gallery-item bg-zinc-800 overflow-hidden hover:transform hover:scale-105 transition-all duration-500 group cursor-pointer border-zinc-700">
-                <img 
-                  src={item.imageUrl} 
-                  alt={item.title}
-                  className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" 
-                />
-                <div className="p-4">
-                  <h4 className="font-medium mb-1">{item.title}</h4>
-                  <p className="text-sm opacity-60">By {artists.find(a => a.id === item.artistId)?.name}</p>
+              <div key={item.id} className="bg-[rgba(242,242,242,0.02)] border border-[rgba(242,242,242,0.1)] overflow-hidden hover:border-[#7B1113] hover:transform hover:scale-105 transition-all duration-500 group cursor-pointer">
+                <div className="relative">
+                  <img 
+                    src={item.imageUrl} 
+                    alt={item.title}
+                    className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700" 
+                  />
+                  <div className="absolute inset-0 bg-[rgba(123,17,19,0.8)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="text-[#F2F2F2] text-sm uppercase tracking-wider">View Project</span>
+                  </div>
                 </div>
-              </Card>
+                <div className="p-6">
+                  <h4 className="font-medium mb-2 text-lg">{item.title}</h4>
+                  <p className="text-sm opacity-60 mb-3">By {artists.find(a => a.id === item.artistId)?.name}</p>
+                  <span className="inline-block px-3 py-1 text-xs bg-[rgba(123,17,19,0.2)] text-[#7B1113] uppercase tracking-wider">
+                    {item.style}
+                  </span>
+                </div>
+              </div>
             ))}
           </div>
           
-          <div className="text-center mt-12">
+          <div className="text-center">
             <Link href="/gallery">
-              <Button variant="outline" className="border-red-800 text-red-800 hover:bg-red-800 hover:text-zinc-50 px-8 py-3 text-sm uppercase tracking-wider transition-all duration-300">
+              <button className="border border-[#7B1113] text-[#7B1113] hover:bg-[#7B1113] hover:text-[#F2F2F2] px-8 py-3 text-sm uppercase tracking-wider transition-all duration-300">
                 View Full Gallery
-              </Button>
+              </button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Artists Preview */}
-      <section className="py-24 bg-zinc-900 relative">
-        <div className="hero-bg-text absolute top-1/2 right-0 transform -translate-y-1/2 rotate-90 select-none">
+      {/* Artists Section */}
+      <section className="py-24 bg-[#0a0a0a] relative">
+        <div className="absolute top-1/2 -right-20 transform -translate-y-1/2 rotate-90 text-[15rem] opacity-[0.02] font-cinzel tracking-[0.3em] select-none whitespace-nowrap">
           ARTISTS
         </div>
         
-        <div className="max-w-7xl mx-auto px-8 relative z-10">
+        <div className="max-w-[1600px] mx-auto px-[5%] relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-cinzel text-5xl lg:text-6xl mb-6 relative inline-block">
-              Our Artists
-              <span className="absolute bottom-0 left-0 w-16 h-1 bg-red-800"></span>
+            <h2 className="font-cinzel text-[clamp(2.5rem,6vw,4rem)] font-normal mb-6 relative inline-block">
+              Master Artists
+              <span className="absolute bottom-[-0.5rem] left-0 w-[60px] h-[3px] bg-[#7B1113]"></span>
             </h2>
             <p className="text-xl opacity-80 max-w-3xl mx-auto leading-relaxed">
-              Meet the master artists behind Berserk Tattoos, each bringing years of experience 
-              and unique specializations to create exceptional tattoo art.
+              Meet the exceptional artists behind Berserk Tattoos. Each master brings years of experience 
+              and unique specializations to create truly extraordinary tattoo art.
             </p>
           </div>
           
           <div className="grid lg:grid-cols-3 gap-8">
             {artists.map((artist) => (
-              <Card key={artist.id} className="bg-zinc-800/50 border border-zinc-700/50 p-8 hover:border-opacity-100 hover:-translate-y-2 transition-all duration-500 group" style={{borderColor: `${artist.themeColor}50`}}>
+              <div key={artist.id} className="bg-[rgba(242,242,242,0.02)] border border-[rgba(242,242,242,0.1)] p-8 hover:border-opacity-100 hover:-translate-y-2 transition-all duration-500 group" style={{borderColor: `${artist.themeColor}50`}}>
                 <div 
                   className="w-0 h-1 group-hover:w-full transition-all duration-300 mb-6"
                   style={{backgroundColor: artist.themeColor}}
                 ></div>
                 
-                <div className="w-32 h-32 bg-zinc-700 rounded-full mx-auto mb-6 relative overflow-hidden">
+                <div className="w-32 h-32 bg-[#333] rounded-full mx-auto mb-6 relative overflow-hidden">
                   <img 
                     src={artist.profileImage} 
                     alt={`${artist.name} - ${artist.specialty}`}
@@ -162,16 +187,16 @@ export default function Home() {
                   />
                 </div>
                 
-                <h3 className="text-cinzel text-2xl text-center mb-2">{artist.name}</h3>
+                <h3 className="font-cinzel text-2xl text-center mb-2">{artist.name}</h3>
                 <p className="text-center opacity-70 mb-6">{artist.specialty}</p>
                 
                 <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="text-center p-3 bg-zinc-800/50 border border-zinc-700/50">
-                    <div className="text-cinzel text-xl" style={{color: artist.themeColor}}>{artist.yearsExperience}+</div>
+                  <div className="text-center p-3 bg-[rgba(242,242,242,0.02)] border border-[rgba(242,242,242,0.1)]">
+                    <div className="font-cinzel text-xl" style={{color: artist.themeColor}}>{artist.yearsExperience}+</div>
                     <div className="text-xs opacity-60 uppercase tracking-wider">Years</div>
                   </div>
-                  <div className="text-center p-3 bg-zinc-800/50 border border-zinc-700/50">
-                    <div className="text-cinzel text-xl" style={{color: artist.themeColor}}>{artist.totalPieces}+</div>
+                  <div className="text-center p-3 bg-[rgba(242,242,242,0.02)] border border-[rgba(242,242,242,0.1)]">
+                    <div className="font-cinzel text-xl" style={{color: artist.themeColor}}>{artist.totalPieces}+</div>
                     <div className="text-xs opacity-60 uppercase tracking-wider">Pieces</div>
                   </div>
                 </div>
@@ -185,46 +210,46 @@ export default function Home() {
                 </div>
                 
                 <Link href={`/artists/${artist.id}`}>
-                  <Button 
-                    variant="outline" 
-                    className="w-full py-3 uppercase tracking-wider text-sm transition-all duration-300"
+                  <button 
+                    className="w-full py-3 uppercase tracking-wider text-sm transition-all duration-300 border"
                     style={{
                       borderColor: artist.themeColor,
                       color: artist.themeColor,
                     }}
                   >
                     View Profile
-                  </Button>
+                  </button>
                 </Link>
-              </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-zinc-950 text-center relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-red-800/10 to-transparent rounded-full animate-pulse"></div>
+      {/* Call to Action */}
+      <section className="py-24 bg-[#111111] text-center relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-radial-gradient from-[rgba(123,17,19,0.1)] to-transparent rounded-full"></div>
         
-        <div className="max-w-4xl mx-auto px-8 relative z-10">
-          <h2 className="text-cinzel text-5xl lg:text-6xl mb-6 relative inline-block">
-            Ready to Start?
-            <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-red-800"></span>
+        <div className="max-w-4xl mx-auto px-[5%] relative z-10">
+          <h2 className="font-cinzel text-[clamp(2.5rem,6vw,4rem)] font-normal mb-6 relative inline-block">
+            Ready to Begin?
+            <span className="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-[60px] h-[3px] bg-[#7B1113]"></span>
           </h2>
           <p className="text-xl opacity-80 mb-8 leading-relaxed">
-            Book your consultation today and begin your journey to exceptional tattoo artistry.
+            Take the first step towards exceptional tattoo artistry. Book your consultation today and 
+            discover how we can bring your vision to life.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link href="/booking">
-              <Button className="bg-red-800 hover:bg-red-700 px-10 py-4 text-lg uppercase tracking-wider hover:shadow-xl hover:shadow-red-800/30 hover:-translate-y-1 transition-all duration-300">
+              <button className="bg-[#7B1113] hover:bg-[#a01619] text-[#F2F2F2] px-10 py-4 text-lg uppercase tracking-wider transition-all duration-300 hover:shadow-[0_10px_30px_rgba(123,17,19,0.3)] hover:-translate-y-1">
                 Book Consultation
-              </Button>
+              </button>
             </Link>
             <Link href="/contact">
-              <Button variant="outline" className="border-zinc-50/20 hover:border-red-800 hover:text-red-800 px-10 py-4 text-lg uppercase tracking-wider transition-all duration-300">
-                Contact Us
-              </Button>
+              <button className="border border-[rgba(242,242,242,0.2)] hover:border-[#7B1113] hover:text-[#7B1113] text-[#F2F2F2] px-10 py-4 text-lg uppercase tracking-wider transition-all duration-300">
+                Get In Touch
+              </button>
             </Link>
           </div>
         </div>
