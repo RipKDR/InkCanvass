@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monique Moore - Dark Aesthetic Specialist | Berserk Tattoos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #111111;
+            color: #F2F2F2;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        /* Film Grain Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px),
+                repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0,0,0,.05) 2px, rgba(0,0,0,.05) 4px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.5;
+        }
+        
+        /* Typography */
+        h1 { 
+            font-family: 'Cinzel', serif; 
+            font-size: clamp(4rem, 12vw, 10rem); 
+            font-weight: 400; 
+            letter-spacing: -0.03em; 
+            line-height: 0.85;
+            text-transform: uppercase;
+        }
+        h2 { 
+            font-family: 'Cinzel', serif; 
+            font-size: clamp(2.5rem, 6vw, 4rem); 
+            font-weight: 400; 
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #7B1113;
+        }
+        h3 { font-family: 'Cinzel', serif; font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 400; }
+        h4 { font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 300; opacity: 0.8; line-height: 1.6; }
+        
+        /* Navigation - Same as landing page */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            z-index: 50;
+            padding: 1.5rem 5%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(123, 17, 19, 0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.75rem;
+            letter-spacing: 0.15em;
+            position: relative;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #F2F2F2;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #F2F2F2;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #7B1113;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links .cta-booking {
+            background: #7B1113;
+            padding: 0.75rem 2rem;
+            border: 1px solid #7B1113;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-links .cta-booking::after {
+            display: none;
+        }
+        
+        /* Artist Hero */
+        .artist-hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: #0a0a0a;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .artist-hero::before {
+            content: 'DARKNESS';
+            position: absolute;
+            top: 50%;
+            left: -10%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 20rem;
+            font-family: 'Cinzel', serif;
+            opacity: 0.02;
+            letter-spacing: 0.5em;
+            white-space: nowrap;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 90%;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content h1 {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        .hero-content h1 span {
+            display: block;
+        }
+        
+        .hero-content h1 span:nth-child(2) {
+            color: #7B1113;
+            font-size: 1.2em;
+            margin-left: -1rem;
+            margin-top: -0.3em;
+        }
+        
+        .artist-title {
+            font-size: 1.5rem;
+            opacity: 0.6;
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .artist-stats-hero {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(242, 242, 242, 0.1);
+            border-bottom: 1px solid rgba(242, 242, 242, 0.1);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-family: 'Cinzel', serif;
+            color: #7B1113;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .hero-ctas {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+        
+        .cta-primary {
+            background: #7B1113;
+            color: #F2F2F2;
+            padding: 1.25rem 3rem;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #7B1113;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(123, 17, 19, 0.3);
+        }
+        
+        .cta-secondary {
+            color: #F2F2F2;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+        
+        .cta-secondary:hover {
+            gap: 1rem;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 700px;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            position: relative;
+            overflow: hidden;
+            transform: rotate(-3deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+        }
+        
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(123, 17, 19, 0.05) 10px,
+                rgba(123, 17, 19, 0.05) 20px
+            );
+        }
+        
+        .hero-image::after {
+            content: 'ARTIST PORTRAIT';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333;
+            letter-spacing: 0.2em;
+            font-size: 0.9rem;
+        }
+        
+        .social-artist {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-artist a {
+            color: #F2F2F2;
+            text-decoration: none;
+            opacity: 0.6;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-artist a:hover {
+            opacity: 1;
+            color: #7B1113;
+        }
+        
+        /* Artist Bio Section */
+        .artist-bio {
+            padding: 8rem 5%;
+            background: #111111;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+        
+        .bio-content p {
+            font-size: 1.25rem;
+            line-height: 2;
+            margin-bottom: 2rem;
+            opacity: 0.85;
+        }
+        
+        .bio-content p:first-of-type {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 1;
+        }
+        
+        .specialties {
+            margin-top: 3rem;
+        }
+        
+        .specialties h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .specialty-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .specialty-tag {
+            border: 1px solid rgba(123, 17, 19, 0.3);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .specialty-tag:hover {
+            border-color: #7B1113;
+            background: rgba(123, 17, 19, 0.1);
+        }
+        
+        .bio-sidebar {
+            position: sticky;
+            top: 120px;
+        }
+        
+        .process-video {
+            width: 100%;
+            height: 300px;
+            background: #1a1a1a;
+            margin-bottom: 2rem;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .process-video::after {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: #7B1113;
+            transition: all 0.3s ease;
+        }
+        
+        .process-video:hover::after {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        
+        .awards {
+            padding: 2rem;
+            background: rgba(123, 17, 19, 0.05);
+            border: 1px solid rgba(123, 17, 19, 0.2);
+        }
+        
+        .awards h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 1;
+        }
+        
+        .awards ul {
+            list-style: none;
+        }
+        
+        .awards li {
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .awards li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: #7B1113;
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            padding: 8rem 5%;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .portfolio::before {
+            content: '666';
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            transform: translateY(-50%);
+            font-size: 15rem;
+            font-family: 'Cinzel', serif;
+            opacity: 0.03;
+            letter-spacing: 0.3em;
+        }
+        
+        .portfolio-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+        
+        .portfolio-filters {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .filter-btn {
+            background: none;
+            border: 1px solid rgba(242, 242, 242, 0.2);
+            color: #F2F2F2;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: #7B1113;
+            background: rgba(123, 17, 19, 0.1);
+            color: #7B1113;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: #0a0a0a;
+            border: 1px solid rgba(123, 17, 19, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .portfolio-item:nth-child(3n+1) { height: 550px; }
+        .portfolio-item:nth-child(3n+2) { height: 450px; }
+        .portfolio-item:nth-child(3n) { height: 500px; }
+        
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(123, 17, 19, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .portfolio-item:hover::before {
+            opacity: 1;
+        }
+        
+        .portfolio-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        
+        .portfolio-item:hover .portfolio-info {
+            transform: translateY(0);
+        }
+        
+        .portfolio-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            opacity: 1;
+        }
+        
+        .portfolio-info p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .portfolio-item:hover {
+            transform: scale(0.97);
+            box-shadow: 0 20px 40px rgba(123, 17, 19, 0.3);
+            border-color: #7B1113;
+        }
+        
+        /* Statement Pieces Showcase */
+        .statement-pieces {
+            padding: 8rem 5%;
+            background: #111111;
+            position: relative;
+        }
+        
+        .statement-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .statement-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .statement-grid:nth-child(even) {
+            grid-template-columns: 1fr 2fr;
+        }
+        
+        .statement-grid:nth-child(even) .statement-image {
+            order: 2;
+        }
+        
+        .statement-image {
+            height: 600px;
+            background: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .statement-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+        }
+        
+        .statement-info h3 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .statement-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+        
+        .piece-details {
+            display: flex;
+            gap: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(242, 242, 242, 0.1);
+        }
+        
+        .detail-item {
+            text-align: center;
+        }
+        
+        .detail-item span:first-child {
+            display: block;
+            font-size: 1.5rem;
+            color: #7B1113;
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-item span:last-child {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 8rem 5%;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .process-step {
+            position: relative;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .process-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4rem;
+            font-family: 'Cinzel', serif;
+            color: #7B1113;
+            opacity: 0.2;
+        }
+        
+        .process-step h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            opacity: 1;
+        }
+        
+        .process-step p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+        
+        /* Testimonials */
+        .artist-testimonials {
+            padding: 8rem 5%;
+            background: #111111;
+            position: relative;
+        }
+        
+        .testimonials-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+            margin-top: 4rem;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            gap: 2rem;
+            animation: testimonialSlide 30s linear infinite;
+        }
+        
+        @keyframes testimonialSlide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .testimonial-card {
+            min-width: 400px;
+            padding: 3rem;
+            background: rgba(123, 17, 19, 0.05);
+            border: 1px solid rgba(123, 17, 19, 0.2);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-size: 4rem;
+            font-family: 'Cinzel', serif;
+            color: #7B1113;
+            opacity: 0.2;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: #333;
+            border-radius: 50%;
+        }
+        
+        .author-info h5 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-info p {
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+        
+        /* Booking CTA */
+        .booking-cta {
+            padding: 10rem 5%;
+            background: #0a0a0a;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .booking-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(123, 17, 19, 0.1), transparent 60%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.3; }
+        }
+        
+        .booking-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .booking-content h2 {
+            margin-bottom: 2rem;
+        }
+        
+        .booking-content h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .availability-preview {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1rem;
+            margin: 3rem 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .day-slot {
+            padding: 1rem;
+            background: rgba(242, 242, 242, 0.05);
+            border: 1px solid rgba(242, 242, 242, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .day-slot.available {
+            border-color: rgba(123, 17, 19, 0.3);
+            cursor: pointer;
+        }
+        
+        .day-slot.available:hover {
+            background: rgba(123, 17, 19, 0.1);
+            border-color: #7B1113;
+        }
+        
+        .day-slot h5 {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .day-slot p {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+        
+        /* Related Artists */
+        .related-artists {
+            padding: 8rem 5%;
+            background: #111111;
+            position: relative;
+        }
+        
+        .related-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+        
+        .related-artist {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem;
+            background: rgba(242, 242, 242, 0.02);
+            border: 1px solid rgba(242, 242, 242, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #F2F2F2;
+        }
+        
+        .related-artist:hover {
+            border-color: rgba(123, 17, 19, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .related-artist-image {
+            width: 100%;
+            height: 250px;
+            background: #222;
+        }
+        
+        .related-artist-info h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .related-artist-info p {
+            opacity: 0.7;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .view-artist {
+            color: #7B1113;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 5rem 5% 3rem;
+            background: #111111;
+            border-top: 1px solid rgba(123, 17, 19, 0.2);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .mobile-menu span {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #F2F2F2;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu span:nth-child(1) { top: 0; }
+        .mobile-menu span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .mobile-menu span:nth-child(3) { bottom: 0; }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .bio-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .bio-sidebar {
+                position: static;
+                margin-top: 3rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .statement-grid,
+            .statement-grid:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+            
+            .statement-grid:nth-child(even) .statement-image {
+                order: 0;
+            }
+            
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-filters {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-card {
+                min-width: 300px;
+            }
+            
+            .availability-preview {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .related-artist {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="index.html" class="logo">BERSERK</a>
+            <div class="nav-links">
+                <a href="#portfolio">PORTFOLIO</a>
+                <a href="#process">PROCESS</a>
+                <a href="#testimonials">REVIEWS</a>
+                <a href="#booking" class="cta-booking">BOOK MONIQUE</a>
+                <a href="index.html#artists">ALL ARTISTS</a>
+            </div>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- Artist Hero -->
+    <section class="artist-hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1>
+                    <span>MONIQUE</span>
+                    <span>MOORE</span>
+                </h1>
+                <p class="artist-title">Bold Expression & Dark Aesthetic Specialist</p>
+                
+                <div class="artist-stats-hero">
+                    <div class="stat-item">
+                        <span class="stat-number">6+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1.5K+</span>
+                        <span class="stat-label">Tattoos Created</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Awards Won</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.8</span>
+                        <span class="stat-label">Client Rating</span>
+                    </div>
+                </div>
+                
+                <div class="hero-ctas">
+                    <a href="#booking" class="cta-primary">BOOK CONSULTATION</a>
+                    <a href="#portfolio" class="cta-secondary">VIEW PORTFOLIO →</a>
+                </div>
+                
+                <div class="social-artist">
+                    <a href="https://www.instagram.com/moniquemoore666/" target="_blank">Instagram</a>
+                    <a href="https://www.threads.com/@moniquemoore666" target="_blank">Threads</a>
+                    <a href="https://www.tiktok.com/@monique.moore666" target="_blank">TikTok</a>
+                    <a href="https://www.facebook.com/people/Monique-Moore/100010669506067/" target="_blank">Facebook</a>
+                </div>
+            </div>
+            
+            <div class="hero-image"></div>
+        </div>
+    </section>
+    
+    <!-- Artist Bio -->
+    <section class="artist-bio">
+        <div class="bio-container">
+            <div class="bio-content">
+                <h2>THE ARTIST</h2>
+                <p>Darkness has never been more beautiful.</p>
+                <p>I create for the bold, the brave, and those who wear their souls on their skin. My work explores the beauty in darkness, the power in shadows, and the strength found in embracing your true self. Every piece is a statement—unapologetic, fierce, and unforgettable.</p>
+                <p>From intricate blackwork to bold illustrative designs, I specialize in tattoos that command attention. My clients don't just get tattoos; they get armor, they get declarations, they get art that speaks when words fail. This is where your inner darkness finds its perfect expression.</p>
+                
+                <div class="specialties">
+                    <h3>Specializations</h3>
+                    <div class="specialty-tags">
+                        <span class="specialty-tag">Blackwork</span>
+                        <span class="specialty-tag">Dark Art</span>
+                        <span class="specialty-tag">Gothic</span>
+                        <span class="specialty-tag">Illustrative</span>
+                        <span class="specialty-tag">Neo-Traditional</span>
+                        <span class="specialty-tag">Occult</span>
+                        <span class="specialty-tag">Horror</span>
+                        <span class="specialty-tag">Statement Pieces</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bio-sidebar">
+                <div class="process-video">
+                    <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #555; font-size: 0.9rem;">PROCESS VIDEO</span>
+                </div>
+                
+                <div class="awards">
+                    <h4>Recognition</h4>
+                    <ul>
+                        <li>Australian Tattoo Expo - Best Blackwork 2024</li>
+                        <li>Dark Arts Convention - Rising Star 2023</li>
+                        <li>Gothic Beauty Magazine Feature 2023</li>
+                        <li>Melbourne Alternative Arts Award 2022</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Portfolio -->
+    <section class="portfolio" id="portfolio">
+        <div class="portfolio-container">
+            <div class="portfolio-header">
+                <h2>PORTFOLIO</h2>
+                <div class="portfolio-filters">
+                    <button class="filter-btn active">ALL</button>
+                    <button class="filter-btn">BLACKWORK</button>
+                    <button class="filter-btn">GOTHIC</button>
+                    <button class="filter-btn">ILLUSTRATIVE</button>
+                    <button class="filter-btn">CUSTOM</button>
+                </div>
+            </div>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-info">
+                        <h4>Death's Garden</h4>
+                        <p>Botanical blackwork sleeve</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-info">
+                        <h4>Serpent's Embrace</h4>
+                        <p>Gothic snake design</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-info">
+                        <h4>Void Walker</h4>
+                        <p>Abstract dark art</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-info">
+                        <h4>Memento Mori</h4>
+                        <p>Skull illustration</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-info">
+                        <h4>Night Blooms</h4>
+                        <p>Dark floral composition</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-info">
+                        <h4>Occult Geometry</h4>
+                        <p>Sacred symbols</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-info">
+                        <h4>Shadow Self</h4>
+                        <p>Illustrative portrait</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-info">
+                        <h4>Raven's Call</h4>
+                        <p>Neo-traditional bird</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-info">
+                        <h4>Underworld</h4>
+                        <p>Large scale back piece</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Statement Pieces Showcase -->
+    <section class="statement-pieces">
+        <div class="statement-container">
+            <h2>STATEMENT PIECES</h2>
+            <div class="statement-grid">
+                <div class="statement-image"></div>
+                <div class="statement-info">
+                    <h3>The Void Stares Back</h3>
+                    <p>A full back piece exploring the concept of inner darkness and self-acceptance. This 40-hour masterpiece combines intricate blackwork with illustrative elements to create a portal into the soul.</p>
+                    <div class="piece-details">
+                        <div class="detail-item">
+                            <span>40</span>
+                            <span>Hours</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>5</span>
+                            <span>Sessions</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>2023</span>
+                            <span>Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statement-grid">
+                <div class="statement-image"></div>
+                <div class="statement-info">
+                    <h3>Death's Symphony</h3>
+                    <p>A sleeve that tells the story of life, death, and rebirth through gothic imagery and bold blackwork. Each element flows seamlessly into the next, creating a narrative that wraps around the arm.</p>
+                    <div class="piece-details">
+                        <div class="detail-item">
+                            <span>25</span>
+                            <span>Hours</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>4</span>
+                            <span>Sessions</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>2024</span>
+                            <span>Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process -->
+    <section class="process" id="process">
+        <div class="process-container">
+            <h2>THE RITUAL</h2>
+            <div class="process-steps">
+                <div class="process-step" data-step="01">
+                    <h4>Dark Consultation</h4>
+                    <p>We explore your vision, diving deep into the symbolism and meaning behind your desired piece.</p>
+                </div>
+                <div class="process-step" data-step="02">
+                    <h4>Concept Creation</h4>
+                    <p>I craft custom designs that capture your essence, blending dark aesthetics with personal narrative.</p>
+                </div>
+                <div class="process-step" data-step="03">
+                    <h4>Design Alchemy</h4>
+                    <p>Together we refine every element until the design perfectly embodies your vision.</p>
+                </div>
+                <div class="process-step" data-step="04">
+                    <h4>Transformation</h4>
+                    <p>Through precise technique and bold execution, your skin becomes a canvas for powerful art.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="artist-testimonials" id="testimonials">
+        <div class="testimonials-container">
+            <h2>VOICES FROM THE DARK</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-track">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">Monique understood my vision immediately. She took my love for gothic art and created something that perfectly represents who I am. The blackwork is flawless and bold.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar"></div>
+                            <div class="author-info">
+                                <h5>Jessica Laurent</h5>
+                                <p>Gothic Sleeve</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">I wanted something that would make a statement, and Monique delivered beyond expectations. Her dark aesthetic is unmatched in Melbourne. Absolutely fearless artist.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar"></div>
+                            <div class="author-info">
+                                <h5>Damien Cross</h5>
+                                <p>Chest Piece</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">The detail in my occult-themed back piece is incredible. Monique's knowledge of symbolism and her artistic skill created something truly powerful. I feel transformed.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar"></div>
+                            <div class="author-info">
+                                <h5>Raven Stone</h5>
+                                <p>Back Piece</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">Working with Monique was an experience. She creates a space where your darkness is celebrated. My tattoo isn't just art—it's a piece of my soul made visible.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar"></div>
+                            <div class="author-info">
+                                <h5>Luna Blackwood</h5>
+                                <p>Dark Floral</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Duplicates for infinite scroll -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">Monique understood my vision immediately. She took my love for gothic art and created something that perfectly represents who I am. The blackwork is flawless and bold.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar"></div>
+                            <div class="author-info">
+                                <h5>Jessica Laurent</h5>
+                                <p>Gothic Sleeve</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">I wanted something that would make a statement, and Monique delivered beyond expectations. Her dark aesthetic is unmatched in Melbourne. Absolutely fearless artist.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar"></div>
+                            <div class="author-info">
+                                <h5>Damien Cross</h5>
+                                <p>Chest Piece</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Booking CTA -->
+    <section class="booking-cta" id="booking">
+        <div class="booking-content">
+            <h2>EMBRACE THE DARKNESS</h2>
+            <p>Ready to make a statement that can't be ignored? Book your consultation and let's create something powerful together.</p>
+            
+            <div class="availability-preview">
+                <div class="day-slot available">
+                    <h5>MON</h5>
+                    <p>3 Slots</p>
+                </div>
+                <div class="day-slot">
+                    <h5>TUE</h5>
+                    <p>Booked</p>
+                </div>
+                <div class="day-slot available">
+                    <h5>WED</h5>
+                    <p>2 Slots</p>
+                </div>
+                <div class="day-slot available">
+                    <h5>THU</h5>
+                    <p>1 Slot</p>
+                </div>
+                <div class="day-slot">
+                    <h5>FRI</h5>
+                    <p>Booked</p>
+                </div>
+                <div class="day-slot available">
+                    <h5>SAT</h5>
+                    <p>4 Slots</p>
+                </div>
+                <div class="day-slot available">
+                    <h5>SUN</h5>
+                    <p>2 Slots</p>
+                </div>
+            </div>
+            
+            <a href="https://book.heygoldie.com/Berserk-Tattoos" class="cta-primary">BOOK WITH MONIQUE</a>
+        </div>
+    </section>
+    
+    <!-- Related Artists -->
+    <section class="related-artists">
+        <div class="related-container">
+            <h2>EXPLORE OTHER ARTISTS</h2>
+            <div class="related-grid">
+                <a href="amelia-kelso.html" class="related-artist">
+                    <div class="related-artist-image"></div>
+                    <div class="related-artist-info">
+                        <h3>Amelia Kelso</h3>
+                        <p>Master of fine line and intricate detail. Amelia creates delicate, precise artwork that enhances your natural form with subtle elegance.</p>
+                        <span class="view-artist">VIEW PORTFOLIO →</span>
+                    </div>
+                </a>
+                <a href="ben-white-raven.html" class="related-artist">
+                    <div class="related-artist-image"></div>
+                    <div class="related-artist-info">
+                        <h3>Ben White Raven</h3>
+                        <p>Master of realism and visual storytelling. Ben transforms concepts into breathtaking photorealistic tattoos that capture every nuance.</p>
+                        <span class="view-artist">VIEW PORTFOLIO →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div style="text-align: center; opacity: 0.5;">
+            © 2025 Berserk Tattoos. All Rights Reserved.
+        </div>
+    </footer>
+</body>
+</html>

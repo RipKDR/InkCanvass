@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Artists - Master Tattoo Artists | Berserk Tattoos Melbourne</title>
+    <meta name="description" content="Meet Melbourne's finest tattoo artists at Berserk Tattoos. Discover Amelia Kelso's fine line mastery, Ben White Raven's realism expertise, and Monique Moore's bold blackwork.">
+    <meta name="keywords" content="tattoo artists melbourne, fine line tattoo artist, realism tattoo artist, blackwork artist, custom tattoo artist melbourne">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global Styles */
+        :root {
+            --color-dark: #111111;
+            --color-light: #F2F2F2;
+            --color-accent: #7B1113;
+            --color-accent-light: rgba(123, 17, 19, 0.1);
+            --color-accent-medium: rgba(123, 17, 19, 0.3);
+            --color-amelia: #C4A484;
+            --color-ben: #8B9DC3;
+            --color-monique: #7B1113;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            --space-3xl: 6rem;
+            --space-4xl: 8rem;
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --z-fixed: 30;
+            --shadow-accent: 0 8px 32px rgba(123, 17, 19, 0.3);
+        }
+        
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--color-dark);
+            color: var(--color-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: crosshair;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Film Grain Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px),
+                repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0,0,0,.05) 2px, rgba(0,0,0,.05) 4px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.5;
+        }
+        
+        /* Typography */
+        h1 { 
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 0.85;
+            text-transform: uppercase;
+        }
+        
+        h2 { 
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: var(--space-lg);
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--color-accent);
+        }
+        
+        h3 { 
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 400;
+        }
+        
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            z-index: var(--z-fixed);
+            padding: var(--space-md) 5%;
+            transition: all var(--transition-slow);
+            border-bottom: 1px solid var(--color-accent-medium);
+        }
+        
+        .nav-container.scrolled {
+            padding: var(--space-sm) 5%;
+            background: rgba(17, 17, 17, 0.95);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            color: var(--color-light);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--color-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            transition: all var(--transition-base);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-accent);
+            transition: width var(--transition-base);
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: var(--color-accent);
+            padding: 0.75rem 2rem;
+            border: 1px solid var(--color-accent);
+            transition: all var(--transition-base);
+        }
+        
+        .nav-cta::after {
+            display: none;
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .mobile-menu span {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--color-light);
+            transition: all var(--transition-base);
+        }
+        
+        .mobile-menu span:nth-child(1) { top: 0; }
+        .mobile-menu span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .mobile-menu span:nth-child(3) { bottom: 0; }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 6rem 5% 2rem;
+            background: var(--color-dark);
+        }
+        
+        .breadcrumb-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb-nav {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .breadcrumb-nav a {
+            color: var(--color-light);
+            text-decoration: none;
+            transition: opacity var(--transition-base);
+        }
+        
+        .breadcrumb-nav a:hover {
+            opacity: 1;
+        }
+        
+        .breadcrumb-nav span {
+            color: var(--color-accent);
+        }
+        
+        /* Artists Hero */
+        .artists-hero {
+            padding: 0 5% var(--space-4xl);
+            background: var(--color-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .artists-hero::before {
+            content: 'ARTISTS';
+            position: absolute;
+            top: 50%;
+            right: -5%;
+            transform: translateY(-50%) rotate(90deg);
+            font-size: 15rem;
+            font-family: var(--font-heading);
+            opacity: 0.02;
+            letter-spacing: 0.3em;
+        }
+        
+        .hero-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content h1 {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .hero-description {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto var(--space-xl);
+            line-height: 1.8;
+        }
+        
+        /* Artist Comparison */
+        .comparison-section {
+            padding: var(--space-4xl) 5%;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .comparison-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .comparison-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-2xl);
+        }
+        
+        .artist-comparison-card {
+            background: rgba(242, 242, 242, 0.02);
+            border: 1px solid rgba(242, 242, 242, 0.1);
+            padding: var(--space-2xl);
+            transition: all var(--transition-slow);
+            text-decoration: none;
+            color: var(--color-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .artist-comparison-card:hover {
+            border-color: var(--color-accent-medium);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .artist-comparison-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--color-accent);
+            transform: scaleX(0);
+            transition: transform var(--transition-base);
+        }
+        
+        .artist-comparison-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .artist-comparison-card.theme-amelia::before {
+            background: var(--color-amelia);
+        }
+        
+        .artist-comparison-card.theme-ben::before {
+            background: var(--color-ben);
+        }
+        
+        .artist-comparison-card.theme-monique::before {
+            background: var(--color-monique);
+        }
+        
+        .artist-avatar {
+            width: 120px;
+            height: 120px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            margin: 0 auto var(--space-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .artist-avatar::after {
+            content: attr(data-artist);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.7rem;
+            color: #333;
+            text-align: center;
+        }
+        
+        .artist-name {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-xs);
+            text-align: center;
+        }
+        
+        .artist-specialty-tag {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .artist-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: var(--space-sm);
+            background: rgba(242, 242, 242, 0.05);
+            border: 1px solid rgba(242, 242, 242, 0.1);
+        }
+        
+        .stat-number {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .theme-amelia .stat-number {
+            color: var(--color-amelia);
+        }
+        
+        .theme-ben .stat-number {
+            color: var(--color-ben);
+        }
+        
+        .theme-monique .stat-number {
+            color: var(--color-monique);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .specialties-list {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .specialties-list h4 {
+            font-size: 1rem;
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .specialty-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+        }
+        
+        .specialty-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(123, 17, 19, 0.1);
+            border: 1px solid rgba(123, 17, 19, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .artist-cta {
+            background: var(--color-accent);
+            color: var(--color-light);
+            padding: var(--space-sm) var(--space-lg);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: block;
+            text-align: center;
+            transition: all var(--transition-base);
+            margin-top: auto;
+        }
+        
+        .theme-amelia .artist-cta {
+            background: var(--color-amelia);
+        }
+        
+        .theme-ben .artist-cta {
+            background: var(--color-ben);
+        }
+        
+        .theme-monique .artist-cta {
+            background: var(--color-monique);
+        }
+        
+        .artist-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Style Quiz Section */
+        .style-quiz {
+            padding: var(--space-4xl) 5%;
+            background: var(--color-dark);
+            position: relative;
+        }
+        
+        .quiz-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .quiz-content {
+            background: rgba(242, 242, 242, 0.02);
+            border: 1px solid rgba(123, 17, 19, 0.2);
+            padding: var(--space-3xl);
+            margin-top: var(--space-xl);
+        }
+        
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+        
+        .quiz-option {
+            padding: var(--space-lg);
+            background: rgba(242, 242, 242, 0.05);
+            border: 2px solid rgba(242, 242, 242, 0.1);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-decoration: none;
+            color: var(--color-light);
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-5px);
+        }
+        
+        .quiz-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-sm);
+            display: block;
+        }
+        
+        .quiz-option h4 {
+            margin-bottom: var(--space-sm);
+            font-size: 1.1rem;
+        }
+        
+        .quiz-option p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+        
+        /* Artist Showcase */
+        .artist-showcase {
+            padding: var(--space-4xl) 5%;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .showcase-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--space-3xl);
+            margin-bottom: var(--space-4xl);
+            align-items: center;
+        }
+        
+        .showcase-grid:nth-child(even) {
+            grid-template-columns: 2fr 1fr;
+        }
+        
+        .showcase-grid:nth-child(even) .showcase-image {
+            order: 2;
+        }
+        
+        .showcase-image {
+            height: 500px;
+            background: linear-gradient(135deg, #1a1a1a, #222);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .showcase-image::after {
+            content: attr(data-artist) ' Portfolio';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .showcase-content h3 {
+            margin-bottom: var(--space-md);
+            font-size: 2.5rem;
+        }
+        
+        .showcase-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .showcase-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .highlight-item {
+            text-align: center;
+            padding: var(--space-sm);
+            background: rgba(242, 242, 242, 0.05);
+        }
+        
+        .highlight-number {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--color-accent);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .highlight-label {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-sm) var(--space-xl);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 500;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+            min-height: 48px;
+        }
+        
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-light);
+            border-color: var(--color-accent);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: var(--space-4xl) 5%;
+            background: var(--color-dark);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(123, 17, 19, 0.1), transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.3; }
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-section h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .cta-section p {
+            margin-bottom: var(--space-xl);
+            opacity: 0.8;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Footer */
+        footer {
+            padding: var(--space-3xl) 5% var(--space-xl);
+            background: var(--color-dark);
+            border-top: 1px solid var(--color-accent-medium);
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer-brand h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: var(--space-sm);
+            letter-spacing: 0.1em;
+        }
+        
+        .footer-brand p {
+            opacity: 0.6;
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+            max-width: 300px;
+        }
+        
+        .footer-section h4 {
+            font-size: 1rem;
+            margin-bottom: var(--space-md);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-section a {
+            color: var(--color-light);
+            text-decoration: none;
+            opacity: 0.6;
+            font-size: 0.9rem;
+            transition: all var(--transition-base);
+        }
+        
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--color-accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(242, 242, 242, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--color-light);
+            font-size: 0.8rem;
+            transition: all var(--transition-base);
+        }
+        
+        .social-links a:hover {
+            border-color: var(--color-accent);
+            background: var(--color-accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid rgba(242, 242, 242, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+            
+            .showcase-grid,
+            .showcase-grid:nth-child(even) {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+            
+            .showcase-grid:nth-child(even) .showcase-image {
+                order: 0;
+            }
+            
+            .quiz-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .comparison-grid {
+                gap: var(--space-lg);
+            }
+            
+            .artist-stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .showcase-highlights {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: var(--space-sm);
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-container" id="navbar">
+        <nav>
+            <a href="index.html" class="logo">BERSERK</a>
+            <div class="nav-links">
+                <a href="artists.html" class="active">ARTISTS</a>
+                <a href="gallery.html">GALLERY</a>
+                <a href="consultation.html" class="nav-cta">CONSULTATION</a>
+                <a href="about.html">ABOUT</a>
+                <a href="index.html#contact">CONTACT</a>
+            </div>
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="breadcrumb-container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Home</a>
+                <span>→</span>
+                <span>Artists</span>
+            </nav>
+        </div>
+    </section>
+    
+    <!-- Artists Hero -->
+    <section class="artists-hero">
+        <div class="hero-content">
+            <h1>THE MASTERS</h1>
+            <p class="hero-description">Meet the visionary artists behind Berserk Tattoos. Each master brings their unique perspective, years of experience, and uncompromising dedication to transform your skin into living art.</p>
+        </div>
+    </section>
+    
+    <!-- Style Quiz -->
+    <section class="style-quiz">
+        <div class="quiz-container">
+            <h2>FIND YOUR PERFECT ARTIST</h2>
+            <div class="quiz-content">
+                <p>Not sure which artist matches your vision? Take our quick style assessment to discover your ideal creative partner.</p>
+                <div class="quiz-grid">
+                    <a href="artists/amelia.html" class="quiz-option">
+                        <span class="quiz-icon">✦</span>
+                        <h4>Delicate & Precise</h4>
+                        <p>Fine lines, intricate details, botanical elements, minimalist designs</p>
+                    </a>
+                    <a href="artists/ben.html" class="quiz-option">
+                        <span class="quiz-icon">👁</span>
+                        <h4>Realistic & Detailed</h4>
+                        <p>Photorealism, portraits, wildlife, memorial pieces, large-scale work</p>
+                    </a>
+                    <a href="artists/monique.html" class="quiz-option">
+                        <span class="quiz-icon">⚡</span>
+                        <h4>Bold & Dramatic</h4>
+                        <p>Blackwork, gothic themes, illustrative, neo-traditional, statement pieces</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Artist Comparison -->
+    <section class="comparison-section">
+        <div class="comparison-container">
+            <div class="comparison-header">
+                <h2>ARTIST COMPARISON</h2>
+                <p>Each artist brings their unique mastery to the collective. Compare their specialties, experience, and artistic approach.</p>
+            </div>
+            <div class="comparison-grid">
+                <!-- Amelia Kelso -->
+                <a href="artists/amelia.html" class="artist-comparison-card theme-amelia">
+                    <div class="artist-avatar" data-artist="AMELIA KELSO"></div>
+                    <h3 class="artist-name">Amelia Kelso</h3>
+                    <p class="artist-specialty-tag">Fine Line & Intricate Detail Specialist</p>
+                    
+                    <div class="artist-stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-number">8+</span>
+                            <span class="stat-label">Years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">2K+</span>
+                            <span class="stat-label">Tattoos</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Awards</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">4.9★</span>
+                            <span class="stat-label">Rating</span>
+                        </div>
+                    </div>
+                    
+                    <div class="specialties-list">
+                        <h4>Specializations</h4>
+                        <div class="specialty-tags">
+                            <span class="specialty-tag">Fine Line</span>
+                            <span class="specialty-tag">Botanical</span>
+                            <span class="specialty-tag">Geometric</span>
+                            <span class="specialty-tag">Minimalist</span>
+                            <span class="specialty-tag">Script</span>
+                            <span class="specialty-tag">Dotwork</span>
+                        </div>
+                    </div>
+                    
+                    <div class="artist-cta">VIEW AMELIA'S PORTFOLIO</div>
+                </a>
+                
+                <!-- Ben White Raven -->
+                <a href="artists/ben.html" class="artist-comparison-card theme-ben">
+                    <div class="artist-avatar" data-artist="BEN WHITE RAVEN"></div>
+                    <h3 class="artist-name">Ben White Raven</h3>
+                    <p class="artist-specialty-tag">Realism & Visual Storytelling Master</p>
+                    
+                    <div class="artist-stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-number">10+</span>
+                            <span class="stat-label">Years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">3K+</span>
+                            <span class="stat-label">Tattoos</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">25</span>
+                            <span class="stat-label">Awards</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">5.0★</span>
+                            <span class="stat-label">Rating</span>
+                        </div>
+                    </div>
+                    
+                    <div class="specialties-list">
+                        <h4>Specializations</h4>
+                        <div class="specialty-tags">
+                            <span class="specialty-tag">Realism</span>
+                            <span class="specialty-tag">Portraits</span>
+                            <span class="specialty-tag">Wildlife</span>
+                            <span class="specialty-tag">Memorial</span>
+                            <span class="specialty-tag">Color Work</span>
+                            <span class="specialty-tag">Large Scale</span>
+                        </div>
+                    </div>
+                    
+                    <div class="artist-cta">VIEW BEN'S PORTFOLIO</div>
+                </a>
+                
+                <!-- Monique Moore -->
+                <a href="artists/monique.html" class="artist-comparison-card theme-monique">
+                    <div class="artist-avatar" data-artist="MONIQUE MOORE"></div>
+                    <h3 class="artist-name">Monique Moore</h3>
+                    <p class="artist-specialty-tag">Bold Expression & Dark Aesthetic</p>
+                    
+                    <div class="artist-stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-number">6+</span>
+                            <span class="stat-label">Years</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">1.5K+</span>
+                            <span class="stat-label">Tattoos</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Awards</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">4.8★</span>
+                            <span class="stat-label">Rating</span>
+                        </div>
+                    </div>
+                    
+                    <div class="specialties-list">
+                        <h4>Specializations</h4>
+                        <div class="specialty-tags">
+                            <span class="specialty-tag">Blackwork</span>
+                            <span class="specialty-tag">Gothic</span>
+                            <span class="specialty-tag">Illustrative</span>
+                            <span class="specialty-tag">Neo-Traditional</span>
+                            <span class="specialty-tag">Horror</span>
+                            <span class="specialty-tag">Statement</span>
+                        </div>
+                    </div>
+                    
+                    <div class="artist-cta">VIEW MONIQUE'S PORTFOLIO</div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Artist Showcase -->
+    <section class="artist-showcase">
+        <div class="showcase-container">
+            <h2>MEET THE ARTISTS</h2>
+            
+            <!-- Amelia Showcase -->
+            <div class="showcase-grid">
+                <div class="showcase-image" data-artist="Amelia"></div>
+                <div class="showcase-content">
+                    <h3>Amelia Kelso</h3>
+                    <p>Precision is her obsession. Every line tells a story. With over eight years of experience, Amelia has developed a signature style that merges technical perfection with emotional depth, focusing on the microscopic details that transform skin into living art.</p>
+                    <div class="showcase-highlights">
+                        <div class="highlight-item">
+                            <span class="highlight-number">8+</span>
+                            <span class="highlight-label">Years Mastering Fine Line</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">2000+</span>
+                            <span class="highlight-label">Delicate Masterpieces</span>
+                        </div>
+                    </div>
+                    <a href="artists/amelia.html" class="btn btn-primary">DISCOVER AMELIA</a>
+                </div>
+            </div>
+            
+            <!-- Ben Showcase -->
+            <div class="showcase-grid">
+                <div class="showcase-image" data-artist="Ben"></div>
+                <div class="showcase-content">
+                    <h3>Ben White Raven</h3>
+                    <p>Reality captured in ink. Stories etched for eternity. A decade of dedication to photorealistic artistry has shaped Ben's approach to tattooing. He doesn't just recreate images—he captures souls and translates emotions into permanent masterpieces.</p>
+                    <div class="showcase-highlights">
+                        <div class="highlight-item">
+                            <span class="highlight-number">10+</span>
+                            <span class="highlight-label">Years of Realism</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">3000+</span>
+                            <span class="highlight-label">Lifelike Creations</span>
+                        </div>
+                    </div>
+                    <a href="artists/ben.html" class="btn btn-primary">DISCOVER BEN</a>
+                </div>
+            </div>
+            
+            <!-- Monique Showcase -->
+            <div class="showcase-grid">
+                <div class="showcase-image" data-artist="Monique"></div>
+                <div class="showcase-content">
+                    <h3>Monique Moore</h3>
+                    <p>Darkness has never been more beautiful. Monique creates for the bold, the brave, and those who wear their souls on their skin. Her work explores the beauty in darkness, the power in shadows, and the strength found in embracing your true self.</p>
+                    <div class="showcase-highlights">
+                        <div class="highlight-item">
+                            <span class="highlight-number">6+</span>
+                            <span class="highlight-label">Years of Bold Expression</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">1500+</span>
+                            <span class="highlight-label">Statement Pieces</span>
+                        </div>
+                    </div>
+                    <a href="artists/monique.html" class="btn btn-primary">DISCOVER MONIQUE</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>FOUND YOUR ARTIST?</h2>
+            <p>Ready to begin your tattoo journey? Start with a personalized consultation where we'll discuss your vision, explore design possibilities, and match you with the perfect artist for your dream tattoo.</p>
+            <a href="consultation.html" class="btn btn-primary">BOOK FREE CONSULTATION</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>BERSERK</h3>
+                <p>Melbourne's premier destination for tattoo artistry. Where skin becomes canvas and ink becomes immortal.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/berserk_tattoos/" target="_blank" rel="noopener">IG</a>
+                    <a href="https://www.facebook.com/BerserkTattoo/" target="_blank" rel="noopener">FB</a>
+                    <a href="#" target="_blank" rel="noopener">TT</a>
+                    <a href="#" target="_blank" rel="noopener">TH</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Artists</h4>
+                <ul>
+                    <li><a href="artists/amelia.html">Amelia Kelso</a></li>
+                    <li><a href="artists/ben.html">Ben White Raven</a></li>
+                    <li><a href="artists/monique.html">Monique Moore</a></li>
+                    <li><a href="consultation.html">Book Consultation</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="gallery.html">Portfolio</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="aftercare.html">Aftercare</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+61478128212">0478 128 212</a></li>
+                    <li><a href="mailto:berserk.tattoos.au@gmail.com">berserk.tattoos.au@gmail.com</a></li>
+                    <li><a href="https://maps.google.com/?q=33+Southern+Road+Heidelberg+Heights+VIC+3081" target="_blank" rel="noopener">33 Southern Road<br>Heidelberg Heights, VIC</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2025 Berserk Tattoos. All Rights Reserved.</div>
+            <div>
+                <a href="privacy.html">Privacy Policy</a> | 
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -10% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Animate elements on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.artist-comparison-card, .showcase-grid');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berserk Tattoos - Melbourne's Premier Tattoo Artists | Custom Ink Art</title>
+    <meta name="description" content="Experience exceptional tattoo artistry at Berserk Tattoos. Home to Melbourne's finest tattoo artists specializing in fine line, realism, and bold blackwork. Book your consultation today.">
+    <meta name="keywords" content="tattoo artist melbourne, custom tattoos, fine line tattoos, realism tattoos, blackwork, tattoo studio melbourne">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Berserk Tattoos - Melbourne's Premier Tattoo Artists">
+    <meta property="og:description" content="Where rebellion meets refinement. Experience exceptional tattoo artistry from Melbourne's finest artists.">
+    <meta property="og:image" content="https://berserktattoos.com/og-image.jpg">
+    <meta property="og:url" content="https://berserktattoos.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TattooShop",
+      "name": "Berserk Tattoos",
+      "image": "https://berserktattoos.com/logo.jpg",
+      "description": "Melbourne's premier tattoo studio specializing in custom artwork",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "33 Southern Road",
+        "addressLocality": "Heidelberg Heights",
+        "addressRegion": "VIC",
+        "postalCode": "3081",
+        "addressCountry": "AU"
+      },
+      "telephone": "+61478128212",
+      "url": "https://berserktattoos.com",
+      "openingHours": "Mo-Su 12:00-19:00"
+    }
+    </script>
+    
+    <style>
+        /* Include Global Design System */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --color-dark: #111111;
+            --color-light: #F2F2F2;
+            --color-accent: #7B1113;
+            --color-accent-light: rgba(123, 17, 19, 0.1);
+            --color-accent-medium: rgba(123, 17, 19, 0.3);
+            --color-amelia: #C4A484;
+            --color-ben: #8B9DC3;
+            --color-monique: #7B1113;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            --space-3xl: 6rem;
+            --space-4xl: 8rem;
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --z-fixed: 30;
+            --shadow-accent: 0 8px 32px rgba(123, 17, 19, 0.3);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--color-dark);
+            color: var(--color-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: crosshair;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Film Grain Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px),
+                repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0,0,0,.05) 2px, rgba(0,0,0,.05) 4px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.5;
+        }
+        
+        /* Typography */
+        h1 { 
+            font-family: var(--font-heading);
+            font-size: clamp(3.5rem, 10vw, 8rem);
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            line-height: 0.85;
+            text-transform: uppercase;
+        }
+        
+        h2 { 
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 400;
+            margin-bottom: var(--space-lg);
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--color-accent);
+        }
+        
+        h3 { 
+            font-family: var(--font-heading);
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 400;
+        }
+        
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            z-index: var(--z-fixed);
+            padding: var(--space-md) 5%;
+            transition: all var(--transition-slow);
+            border-bottom: 1px solid var(--color-accent-medium);
+        }
+        
+        .nav-container.scrolled {
+            padding: var(--space-sm) 5%;
+            background: rgba(17, 17, 17, 0.95);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            color: var(--color-light);
+            position: relative;
+        }
+        
+        .logo::after {
+            content: '®';
+            position: absolute;
+            top: -0.5rem;
+            right: -1rem;
+            font-size: 0.6rem;
+            opacity: 0.5;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--color-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            transition: all var(--transition-base);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-accent);
+            transition: width var(--transition-base);
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: var(--color-accent);
+            padding: 0.75rem 2rem;
+            border: 1px solid var(--color-accent);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-cta::after {
+            display: none;
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .mobile-menu span {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--color-light);
+            transition: all var(--transition-base);
+        }
+        
+        .mobile-menu span:nth-child(1) { top: 0; }
+        .mobile-menu span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .mobile-menu span:nth-child(3) { bottom: 0; }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: var(--color-dark);
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at top right, rgba(123, 17, 19, 0.15), transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(123, 17, 19, 0.1), transparent 50%),
+                #0a0a0a;
+            z-index: 0;
+        }
+        
+        .hero-background::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(123,17,19,0.1)" stroke-width="0.5"/></svg>');
+            background-size: 50px 50px;
+            animation: grid-move 20s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: var(--space-3xl);
+            align-items: center;
+            width: 100%;
+        }
+        
+        .hero-text {
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .hero-text h1 {
+            margin-bottom: var(--space-md);
+            position: relative;
+        }
+        
+        .hero-text h1 span {
+            display: block;
+            overflow: hidden;
+        }
+        
+        .hero-text h1 span:nth-child(2) {
+            color: var(--color-accent);
+            margin-left: 3rem;
+            margin-top: -0.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-xl);
+            max-width: 500px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .hero-ctas {
+            display: flex;
+            gap: var(--space-lg);
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-sm) var(--space-xl);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 500;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+            min-height: 48px;
+        }
+        
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-light);
+            border-color: var(--color-accent);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-light);
+            border-color: var(--color-light);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--color-light);
+            color: var(--color-dark);
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: var(--space-xl);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        .stat-item {
+            text-align: left;
+        }
+        
+        .stat-number {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+        }
+        
+        .hero-visual {
+            position: relative;
+            height: 600px;
+            background: linear-gradient(135deg, #1a1a1a, #222);
+            transform: rotate(3deg);
+            overflow: hidden;
+        }
+        
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(123, 17, 19, 0.05) 10px,
+                rgba(123, 17, 19, 0.05) 20px
+            );
+        }
+        
+        .hero-visual::after {
+            content: 'MASTERFUL\AINTENSITY';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-align: center;
+            white-space: pre;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(242, 242, 242, 0.3);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+        
+        .scroll-indicator:hover {
+            border-color: var(--color-accent);
+        }
+        
+        .scroll-indicator::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 12px;
+            background: var(--color-light);
+            border-radius: 2px;
+            animation: scroll 2s infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { transform: translateX(-50%) translateY(20px); opacity: 0; }
+        }
+        
+        /* Artists Preview Section */
+        .artists-preview {
+            padding: var(--space-4xl) 5%;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .artists-preview::before {
+            content: 'THE ARTISTS';
+            position: absolute;
+            top: 50%;
+            right: -5%;
+            transform: translateY(-50%) rotate(90deg);
+            font-size: 8rem;
+            font-family: var(--font-heading);
+            opacity: 0.02;
+            letter-spacing: 0.3em;
+            white-space: nowrap;
+        }
+        
+        .section-header {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: var(--space-3xl);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-description {
+            opacity: 0.7;
+            max-width: 400px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .artists-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-2xl);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .artist-card {
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition-slow);
+            text-decoration: none;
+            color: var(--color-light);
+        }
+        
+        .artist-card:nth-child(2) {
+            transform: translateY(4rem);
+        }
+        
+        .artist-card:nth-child(3) {
+            transform: translateY(8rem);
+        }
+        
+        .artist-card:hover {
+            transform: translateY(0) scale(0.98);
+        }
+        
+        .artist-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #1a1a1a, #222);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: var(--space-lg);
+            transition: all var(--transition-slow);
+        }
+        
+        .artist-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(123, 17, 19, 0.1) 2px,
+                rgba(123, 17, 19, 0.1) 4px
+            );
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+        
+        .artist-card:hover .artist-image::before {
+            opacity: 1;
+        }
+        
+        .artist-image::after {
+            content: attr(data-artist);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333;
+            text-align: center;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        
+        .artist-info h3 {
+            margin-bottom: var(--space-xs);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+        
+        .artist-specialty {
+            opacity: 0.6;
+            margin-bottom: var(--space-md);
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .artist-stats {
+            display: flex;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-md);
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+        
+        .artist-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            transition: all var(--transition-base);
+        }
+        
+        .artist-link::after {
+            content: '→';
+            transition: transform var(--transition-base);
+        }
+        
+        .artist-link:hover::after {
+            transform: translateX(5px);
+        }
+        
+        /* Gallery Preview */
+        .gallery-preview {
+            padding: var(--space-4xl) 5%;
+            background: var(--color-dark);
+            position: relative;
+        }
+        
+        .gallery-preview::before {
+            content: 'PORTFOLIO';
+            position: absolute;
+            top: 50%;
+            left: -5%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 8rem;
+            font-family: var(--font-heading);
+            opacity: 0.02;
+            letter-spacing: 0.3em;
+        }
+        
+        .gallery-filters {
+            max-width: 1600px;
+            margin: 0 auto var(--space-xl);
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .filter-btn {
+            background: none;
+            border: 1px solid rgba(242, 242, 242, 0.2);
+            color: var(--color-light);
+            padding: var(--space-xs) var(--space-md);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+        
+        .gallery-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-2xl);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .gallery-item {
+            background: linear-gradient(135deg, #1a1a1a, #222);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-slow);
+        }
+        
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(123, 17, 19, 0.8);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+            z-index: 1;
+        }
+        
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+        
+        .gallery-item::after {
+            content: 'VIEW PROJECT';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--color-light);
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            opacity: 0;
+            transition: all var(--transition-base);
+            z-index: 2;
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        
+        .gallery-item:nth-child(1) { height: 300px; }
+        .gallery-item:nth-child(2) { height: 400px; grid-column: span 2; }
+        .gallery-item:nth-child(3) { height: 300px; }
+        .gallery-item:nth-child(4) { height: 350px; }
+        .gallery-item:nth-child(5) { height: 450px; grid-column: span 2; }
+        .gallery-item:nth-child(6) { height: 350px; }
+        .gallery-item:nth-child(7) { height: 300px; }
+        .gallery-item:nth-child(8) { height: 400px; }
+        
+        .gallery-item:hover {
+            transform: scale(0.95);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Studio Philosophy */
+        .philosophy {
+            padding: var(--space-4xl) 5%;
+            background: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .philosophy::before {
+            content: 'BEYOND';
+            position: absolute;
+            top: 50%;
+            left: -10%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 15rem;
+            font-family: var(--font-heading);
+            opacity: 0.02;
+            letter-spacing: 0.5em;
+        }
+        
+        .philosophy-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: var(--space-4xl);
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .philosophy-text p {
+            font-size: 1.25rem;
+            line-height: 2;
+            margin-bottom: var(--space-lg);
+            opacity: 0.85;
+        }
+        
+        .philosophy-text p:first-of-type {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 1;
+        }
+        
+        .philosophy-image {
+            width: 100%;
+            height: 500px;
+            background: 
+                linear-gradient(135deg, rgba(123, 17, 19, 0.2), transparent),
+                #1a1a1a;
+            position: relative;
+            transform: rotate(-3deg);
+            overflow: hidden;
+        }
+        
+        .philosophy-image::after {
+            content: 'EST. 2015';
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 3rem;
+            font-family: var(--font-heading);
+            opacity: 0.1;
+            letter-spacing: 0.2em;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: var(--space-4xl) 5%;
+            background: var(--color-dark);
+            position: relative;
+        }
+        
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+            margin-top: var(--space-2xl);
+        }
+        
+        .testimonial {
+            padding: var(--space-lg);
+            border: 1px solid var(--color-accent-medium);
+            position: relative;
+            transition: all var(--transition-base);
+        }
+        
+        .testimonial:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-5px);
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            opacity: 0.8;
+            margin-bottom: var(--space-md);
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+        
+        .stars {
+            color: var(--color-accent);
+            margin-bottom: var(--space-sm);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: var(--space-4xl) 5%;
+            background: #0a0a0a;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(123, 17, 19, 0.1), transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.3; }
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-section h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .cta-section p {
+            margin-bottom: var(--space-xl);
+            opacity: 0.8;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Footer */
+        footer {
+            padding: var(--space-3xl) 5% var(--space-xl);
+            background: var(--color-dark);
+            border-top: 1px solid var(--color-accent-medium);
+            position: relative;
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer-brand h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: var(--space-sm);
+            letter-spacing: 0.1em;
+        }
+        
+        .footer-brand p {
+            opacity: 0.6;
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+            max-width: 300px;
+        }
+        
+        .footer-section h4 {
+            font-size: 1rem;
+            margin-bottom: var(--space-md);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 1;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-section a {
+            color: var(--color-light);
+            text-decoration: none;
+            opacity: 0.6;
+            font-size: 0.9rem;
+            transition: all var(--transition-base);
+        }
+        
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--color-accent);
+        }
+        
+        .hours-grid {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .hours-grid span:nth-child(odd) {
+            opacity: 0.6;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(242, 242, 242, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--color-light);
+            font-size: 0.8rem;
+            transition: all var(--transition-base);
+        }
+        
+        .social-links a:hover {
+            border-color: var(--color-accent);
+            background: var(--color-accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid rgba(242, 242, 242, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-visual {
+                display: none;
+            }
+            
+            .artists-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-3xl);
+            }
+            
+            .artist-card:nth-child(2),
+            .artist-card:nth-child(3) {
+                transform: translateY(0);
+            }
+            
+            .philosophy-container {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-item:nth-child(2),
+            .gallery-item:nth-child(5) {
+                grid-column: span 1;
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-filters {
+                flex-wrap: wrap;
+                gap: var(--space-sm);
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: var(--space-sm);
+                text-align: center;
+            }
+            
+            .hero-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-container" id="navbar">
+        <nav>
+            <a href="index.html" class="logo">BERSERK</a>
+            <div class="nav-links">
+                <a href="artists.html">ARTISTS</a>
+                <a href="gallery.html">GALLERY</a>
+                <a href="consultation.html" class="nav-cta">CONSULTATION</a>
+                <a href="about.html">ABOUT</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    <span>MASTERFUL</span>
+                    <span>INTENSITY</span>
+                </h1>
+                <p class="hero-subtitle">Melbourne's avant-garde tattoo artistry. Where rebellion meets refinement, and skin becomes the canvas for your most meaningful stories.</p>
+                <div class="hero-ctas">
+                    <a href="consultation.html" class="btn btn-primary">FREE CONSULTATION</a>
+                    <a href="artists.html" class="btn btn-secondary">MEET OUR ARTISTS</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">8+</span>
+                        <span class="stat-label">Years Excellence</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Master Artists</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Happy Clients</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.9★</span>
+                        <span class="stat-label">Rating</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual"></div>
+        </div>
+        <div class="scroll-indicator" onclick="document.getElementById('artists-preview').scrollIntoView()"></div>
+    </section>
+    
+    <!-- Artists Preview -->
+    <section class="artists-preview" id="artists-preview">
+        <div class="section-header">
+            <h2>THE MASTERS</h2>
+            <p class="section-description">Three visionary artists. Each bringing their unique perspective to transform your skin into living art. Discover your perfect match.</p>
+        </div>
+        <div class="artists-grid">
+            <a href="artists/amelia.html" class="artist-card">
+                <div class="artist-image" data-artist="Amelia Kelso Portrait"></div>
+                <div class="artist-info">
+                    <h3>Amelia Kelso</h3>
+                    <p class="artist-specialty">Fine Line & Intricate Detail Specialist</p>
+                    <div class="artist-stats">
+                        <span>8+ Years</span>
+                        <span>2,000+ Works</span>
+                        <span>15 Awards</span>
+                    </div>
+                    <span class="artist-link">Explore Portfolio</span>
+                </div>
+            </a>
+            <a href="artists/ben.html" class="artist-card">
+                <div class="artist-image" data-artist="Ben White Raven Portrait"></div>
+                <div class="artist-info">
+                    <h3>Ben White Raven</h3>
+                    <p class="artist-specialty">Realism & Visual Storytelling Master</p>
+                    <div class="artist-stats">
+                        <span>10+ Years</span>
+                        <span>3,000+ Works</span>
+                        <span>25 Awards</span>
+                    </div>
+                    <span class="artist-link">Explore Portfolio</span>
+                </div>
+            </a>
+            <a href="artists/monique.html" class="artist-card">
+                <div class="artist-image" data-artist="Monique Moore Portrait"></div>
+                <div class="artist-info">
+                    <h3>Monique Moore</h3>
+                    <p class="artist-specialty">Bold Expression & Dark Aesthetic</p>
+                    <div class="artist-stats">
+                        <span>6+ Years</span>
+                        <span>1,500+ Works</span>
+                        <span>12 Awards</span>
+                    </div>
+                    <span class="artist-link">Explore Portfolio</span>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Gallery Preview -->
+    <section class="gallery-preview" id="gallery-preview">
+        <div class="section-header">
+            <h2>FROM THE NEEDLE</h2>
+            <p class="section-description">Every piece tells a story. Browse our gallery of transformations and find inspiration for your next masterpiece.</p>
+        </div>
+        <div class="gallery-filters">
+            <button class="filter-btn active">ALL WORK</button>
+            <button class="filter-btn">FINE LINE</button>
+            <button class="filter-btn">REALISM</button>
+            <button class="filter-btn">BLACKWORK</button>
+            <button class="filter-btn">CUSTOM</button>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+        </div>
+        <div style="text-align: center;">
+            <a href="gallery.html" class="btn btn-secondary">VIEW FULL GALLERY</a>
+        </div>
+    </section>
+    
+    <!-- Studio Philosophy -->
+    <section class="philosophy">
+        <div class="philosophy-container">
+            <div class="philosophy-text">
+                <h2>BEYOND THE INK</h2>
+                <p>We don't just tattoo. We transform.</p>
+                <p>At Berserk Tattoos, every piece is a rebellion against the ordinary. Our studio exists at the bleeding edge where technical mastery meets raw artistic vision. This is where stories become scars, and scars become art.</p>
+                <p>Trust us with your skin. We'll give you eternity.</p>
+                <a href="about.html" class="artist-link">DISCOVER OUR STORY</a>
+            </div>
+            <div class="philosophy-image"></div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <h2>VOICES FROM THE CHAIR</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"Amelia transformed my vision into something beyond my wildest dreams. The detail is insane and the experience was incredible."</p>
+                    <div class="testimonial-author">— Sarah M.</div>
+                </div>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"Ben's realism work is unmatched. People can't believe it's a tattoo. The consultation process was so professional and thorough."</p>
+                    <div class="testimonial-author">— Michael R.</div>
+                </div>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"Monique created a masterpiece on my back. Her bold style is exactly what I wanted. The whole team made me feel so welcome."</p>
+                    <div class="testimonial-author">— Jessica L.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>READY FOR YOUR MASTERPIECE?</h2>
+            <p>Begin your journey with a personalized consultation. Our artists will work with you to bring your vision to life in ways you never imagined possible. Book your free consultation today.</p>
+            <a href="consultation.html" class="btn btn-primary">START YOUR CONSULTATION</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>BERSERK</h3>
+                <p>Melbourne's premier destination for tattoo artistry. Where skin becomes canvas and ink becomes immortal.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/berserk_tattoos/" target="_blank" rel="noopener">IG</a>
+                    <a href="https://www.facebook.com/BerserkTattoo/" target="_blank" rel="noopener">FB</a>
+                    <a href="#" target="_blank" rel="noopener">TT</a>
+                    <a href="#" target="_blank" rel="noopener">TH</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="artists.html">Our Artists</a></li>
+                    <li><a href="gallery.html">Portfolio</a></li>
+                    <li><a href="consultation.html">Free Consultation</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="aftercare.html">Aftercare</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Studio Hours</h4>
+                <div class="hours-grid">
+                    <span>Monday</span><span>12:00 - 7:00 PM</span>
+                    <span>Tuesday</span><span>12:00 - 5:00 PM</span>
+                    <span>Wednesday</span><span>12:00 - 7:00 PM</span>
+                    <span>Thursday</span><span>12:00 - 7:00 PM</span>
+                    <span>Friday</span><span>12:00 - 7:00 PM</span>
+                    <span>Saturday</span><span>12:00 - 7:00 PM</span>
+                    <span>Sunday</span><span>12:00 - 7:00 PM</span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Get In Touch</h4>
+                <ul>
+                    <li><a href="tel:+61478128212">0478 128 212</a></li>
+                    <li><a href="mailto:berserk.tattoos.au@gmail.com">berserk.tattoos.au@gmail.com</a></li>
+                    <li><a href="https://maps.google.com/?q=33+Southern+Road+Heidelberg+Heights+VIC+3081" target="_blank" rel="noopener">33 Southern Road<br>Heidelberg Heights<br>Victoria 3081</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2025 Berserk Tattoos. All Rights Reserved.</div>
+            <div>
+                <a href="privacy.html">Privacy Policy</a> | 
+                <a href="terms.html">Terms of Service</a> | 
+                <a href="consultation.html">Booking Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+
+        // Gallery filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -10% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.artist-card, .gallery-item, .testimonial');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

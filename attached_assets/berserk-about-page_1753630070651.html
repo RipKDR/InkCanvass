@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Berserk Tattoos | Our Story, Studio & Philosophy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #111111;
+            color: #F2F2F2;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        /* Film Grain Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px),
+                repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0,0,0,.05) 2px, rgba(0,0,0,.05) 4px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.5;
+        }
+        
+        /* Typography */
+        h1 { 
+            font-family: 'Cinzel', serif; 
+            font-size: clamp(3rem, 8vw, 6rem); 
+            font-weight: 400; 
+            letter-spacing: -0.02em; 
+            line-height: 0.85;
+            text-transform: uppercase;
+        }
+        h2 { 
+            font-family: 'Cinzel', serif; 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            font-weight: 400; 
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #7B1113;
+        }
+        h3 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; }
+        h4 { font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300; opacity: 0.8; line-height: 1.6; }
+        
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            z-index: 50;
+            padding: 1.5rem 5%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(123, 17, 19, 0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.75rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            color: #F2F2F2;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #F2F2F2;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #7B1113;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links .cta-booking {
+            background: #7B1113;
+            padding: 0.75rem 2rem;
+            border: 1px solid #7B1113;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links .cta-booking::after {
+            display: none;
+        }
+        
+        /* About Hero */
+        .about-hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: #0a0a0a;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at top left, rgba(123, 17, 19, 0.15), transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(123, 17, 19, 0.1), transparent 50%);
+            z-index: 0;
+        }
+        
+        .hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+            text-align: center;
+        }
+        
+        .hero-content h1 {
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-content h1 span {
+            display: block;
+        }
+        
+        .hero-content h1 span:nth-child(2) {
+            color: #7B1113;
+            font-size: 0.8em;
+            margin-top: -0.2em;
+        }
+        
+        .hero-tagline {
+            font-size: 1.5rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(242, 242, 242, 0.3);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-indicator::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 12px;
+            background: #F2F2F2;
+            border-radius: 2px;
+            animation: scroll 2s infinite;
+        }
+        
+        /* Timeline Section */
+        .timeline-section {
+            padding: 8rem 5%;
+            background: #111111;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 4rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: rgba(123, 17, 19, 0.2);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            padding-right: 50%;
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            padding-left: 50%;
+            text-align: left;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #7B1113;
+            border: 4px solid #111111;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .timeline-content {
+            padding: 2rem;
+            background: rgba(123, 17, 19, 0.05);
+            border: 1px solid rgba(123, 17, 19, 0.2);
+            position: relative;
+        }
+        
+        .timeline-year {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #7B1113;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-description {
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+        
+        /* Studio Tour Section */
+        .studio-tour {
+            padding: 8rem 5%;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .tour-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .tour-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .tour-item {
+            position: relative;
+            height: 400px;
+            background: #1a1a1a;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .tour-item:nth-child(1) {
+            grid-column: span 2;
+        }
+        
+        .tour-item:hover {
+            transform: scale(0.97);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tour-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(17, 17, 17, 0.9));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tour-item:hover .tour-overlay {
+            opacity: 1;
+        }
+        
+        .tour-info {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .tour-item:hover .tour-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .tour-info h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .tour-info p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+        
+        .virtual-tour-btn {
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 1rem 3rem;
+            background: #7B1113;
+            color: #F2F2F2;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .virtual-tour-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(123, 17, 19, 0.3);
+        }
+        
+        /* Philosophy Section */
+        .philosophy {
+            padding: 8rem 5%;
+            background: #111111;
+            position: relative;
+        }
+        
+        .philosophy::before {
+            content: 'BERSERK';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20rem;
+            font-family: 'Cinzel', serif;
+            opacity: 0.02;
+            letter-spacing: 0.5em;
+        }
+        
+        .philosophy-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .philosophy-content {
+            margin-top: 3rem;
+        }
+        
+        .philosophy-content p {
+            font-size: 1.5rem;
+            line-height: 2;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 5rem;
+        }
+        
+        .value-item {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid rgba(123, 17, 19, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .value-item:hover {
+            border-color: #7B1113;
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            font-size: 3rem;
+            color: #7B1113;
+            margin-bottom: 1rem;
+        }
+        
+        .value-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            opacity: 1;
+        }
+        
+        .value-item p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        /* Team Section */
+        .team-section {
+            padding: 8rem 5%;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .team-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .team-member {
+            position: relative;
+            background: #111111;
+            border: 1px solid rgba(123, 17, 19, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            border-color: #7B1113;
+        }
+        
+        .member-image {
+            width: 100%;
+            height: 350px;
+            background: #1a1a1a;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .member-image::after {
+            content: attr(data-role);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        .member-info {
+            padding: 2rem;
+        }
+        
+        .member-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-role {
+            color: #7B1113;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        .member-bio {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+        
+        /* Achievement Counter */
+        .achievements {
+            padding: 6rem 5%;
+            background: #111111;
+            border-top: 1px solid rgba(123, 17, 19, 0.2);
+            border-bottom: 1px solid rgba(123, 17, 19, 0.2);
+        }
+        
+        .achievements-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+        
+        .achievement-item {
+            position: relative;
+        }
+        
+        .achievement-number {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            color: #7B1113;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .achievement-label {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Process Section */
+        .process-section {
+            padding: 8rem 5%;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .process-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+        
+        .process-card {
+            padding: 3rem;
+            background: rgba(242, 242, 242, 0.02);
+            border: 1px solid rgba(242, 242, 242, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .process-card:hover {
+            border-color: rgba(123, 17, 19, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .process-card h3 {
+            margin-bottom: 1.5rem;
+            color: #7B1113;
+        }
+        
+        .process-card ul {
+            list-style: none;
+        }
+        
+        .process-card li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        .process-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #7B1113;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 8rem 5%;
+            background: #111111;
+            position: relative;
+        }
+        
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .faq-list {
+            margin-top: 3rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid rgba(123, 17, 19, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: #7B1113;
+        }
+        
+        .faq-question {
+            padding: 1.5rem 2rem;
+            background: none;
+            border: none;
+            color: #F2F2F2;
+            font-size: 1.1rem;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: rgba(123, 17, 19, 0.05);
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            padding: 0 2rem 2rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+        
+        /* Instagram Feed */
+        .instagram-section {
+            padding: 8rem 5%;
+            background: #0a0a0a;
+            position: relative;
+        }
+        
+        .instagram-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .instagram-item {
+            position: relative;
+            padding-bottom: 100%;
+            background: #1a1a1a;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .instagram-item:hover {
+            transform: scale(0.95);
+        }
+        
+        .instagram-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(123, 17, 19, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .instagram-item:hover .instagram-overlay {
+            opacity: 1;
+        }
+        
+        .instagram-stats {
+            text-align: center;
+            color: #F2F2F2;
+        }
+        
+        .instagram-stats span {
+            display: block;
+            margin: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .follow-btn {
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 1rem 3rem;
+            background: none;
+            border: 2px solid #7B1113;
+            color: #7B1113;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .follow-btn:hover {
+            background: #7B1113;
+            color: #F2F2F2;
+        }
+        
+        /* Contact CTA */
+        .contact-cta {
+            padding: 8rem 5%;
+            background: #111111;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(123, 17, 19, 0.1), transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        .contact-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-content h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .contact-content p {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-primary {
+            background: #7B1113;
+            color: #F2F2F2;
+            padding: 1.25rem 3rem;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #7B1113;
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(123, 17, 19, 0.3);
+        }
+        
+        .cta-secondary {
+            background: none;
+            border: 2px solid #F2F2F2;
+            color: #F2F2F2;
+            padding: 1.25rem 3rem;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-secondary:hover {
+            border-color: #7B1113;
+            color: #7B1113;
+        }
+        
+        /* Map Section */
+        .map-section {
+            position: relative;
+            height: 500px;
+            background: #1a1a1a;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            transform: translateY(-50%);
+            background: #111111;
+            padding: 3rem;
+            border: 1px solid rgba(123, 17, 19, 0.2);
+            max-width: 400px;
+            z-index: 2;
+        }
+        
+        .map-overlay h3 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .location-info {
+            margin-bottom: 2rem;
+        }
+        
+        .location-info p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        .directions-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: #7B1113;
+            color: #F2F2F2;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .directions-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(123, 17, 19, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 5rem 5% 3rem;
+            background: #111111;
+            border-top: 1px solid rgba(123, 17, 19, 0.2);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .mobile-menu span {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #F2F2F2;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu span:nth-child(1) { top: 0; }
+        .mobile-menu span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .mobile-menu span:nth-child(3) { bottom: 0; }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding: 0;
+                text-align: left;
+                padding-left: 4rem;
+            }
+            
+            .timeline::before {
+                left: 2rem;
+            }
+            
+            .timeline-item::before {
+                left: 2rem;
+            }
+            
+            .tour-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tour-item:nth-child(1) {
+                grid-column: span 1;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .instagram-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            
+            .achievements-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .map-overlay {
+                position: static;
+                transform: none;
+                max-width: 100%;
+                margin: 2rem;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { transform: translateX(-50%) translateY(20px); opacity: 0; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.3; }
+        }
+        
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="index.html" class="logo">BERSERK</a>
+            <div class="nav-links">
+                <a href="index.html#artists">ARTISTS</a>
+                <a href="gallery.html">GALLERY</a>
+                <a href="index.html#booking" class="cta-booking">BOOKING</a>
+                <a href="#" class="active">ABOUT</a>
+                <a href="index.html#contact">CONTACT</a>
+            </div>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- About Hero -->
+    <section class="about-hero">
+        <video class="hero-video" autoplay muted loop>
+            <source src="studio-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h1>
+                <span>OUR STORY</span>
+                <span>OUR LEGACY</span>
+            </h1>
+            <p class="hero-tagline">Where rebellion meets refinement. Where art becomes eternal.</p>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+    
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <h2>THE JOURNEY</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2015</div>
+                        <h3 class="timeline-title">The Beginning</h3>
+                        <p class="timeline-description">Founded in a small Heidelberg Heights space with a vision to challenge Melbourne's tattoo scene. One artist, one chair, infinite ambition.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2017</div>
+                        <h3 class="timeline-title">Expanding Vision</h3>
+                        <p class="timeline-description">Welcomed our first guest artists and began building a reputation for uncompromising quality and artistic innovation.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2019</div>
+                        <h3 class="timeline-title">The Collective Forms</h3>
+                        <p class="timeline-description">Amelia, Ben, and Monique join forces, each bringing their unique mastery to create Melbourne's most diverse tattoo collective.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2021</div>
+                        <h3 class="timeline-title">Studio Evolution</h3>
+                        <p class="timeline-description">Complete renovation transforms our space into a cathedral of creativity, designed to inspire both artists and clients.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2023</div>
+                        <h3 class="timeline-title">Recognition & Growth</h3>
+                        <p class="timeline-description">Multiple international awards establish Berserk as a destination studio, attracting clients from across the globe.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025</div>
+                        <h3 class="timeline-title">The Future Unfolds</h3>
+                        <p class="timeline-description">Continuing to push boundaries, mentor emerging artists, and create tattoos that define a generation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Studio Tour Section -->
+    <section class="studio-tour">
+        <div class="tour-container">
+            <h2>THE SANCTUARY</h2>
+            <p style="text-align: center; opacity: 0.8; max-width: 600px; margin: 0 auto 3rem;">Step inside our creative sanctuary where art comes to life in an atmosphere of focused intensity and refined rebellion.</p>
+            <div class="tour-grid">
+                <div class="tour-item">
+                    <div class="tour-overlay"></div>
+                    <div class="tour-info">
+                        <h3>The Main Floor</h3>
+                        <p>Our open-concept workspace where creativity flows freely between artists and clients.</p>
+                    </div>
+                </div>
+                <div class="tour-item">
+                    <div class="tour-overlay"></div>
+                    <div class="tour-info">
+                        <h3>Private Studios</h3>
+                        <p>Intimate spaces for focused work on large-scale projects.</p>
+                    </div>
+                </div>
+                <div class="tour-item">
+                    <div class="tour-overlay"></div>
+                    <div class="tour-info">
+                        <h3>Consultation Lounge</h3>
+                        <p>Where visions take shape through collaborative design sessions.</p>
+                    </div>
+                </div>
+                <div class="tour-item">
+                    <div class="tour-overlay"></div>
+                    <div class="tour-info">
+                        <h3>The Gallery Wall</h3>
+                        <p>Showcasing our evolving collection of artistic achievements.</p>
+                    </div>
+                </div>
+                <div class="tour-item">
+                    <div class="tour-overlay"></div>
+                    <div class="tour-info">
+                        <h3>Sterilization Lab</h3>
+                        <p>State-of-the-art equipment ensuring the highest safety standards.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <a href="#" class="virtual-tour-btn">TAKE VIRTUAL TOUR</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Philosophy Section -->
+    <section class="philosophy">
+        <div class="philosophy-container">
+            <h2>OUR PHILOSOPHY</h2>
+            <div class="philosophy-content">
+                <p>We believe tattoos are more than ink on skin.</p>
+                <p>They are declarations of identity, markers of journey, and art that breathes with you. At Berserk, we don't just apply tattoos—we collaborate in the creation of personal mythology.</p>
+                <p>Every line is intentional. Every shadow earned. Every piece, a masterwork.</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">⚡</div>
+                    <h4>Uncompromising Quality</h4>
+                    <p>Excellence isn't negotiable. Every tattoo leaving our studio represents the pinnacle of artistic achievement.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🔥</div>
+                    <h4>Artistic Innovation</h4>
+                    <p>Pushing boundaries and challenging conventions to create tattoos that define new possibilities.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">💀</div>
+                    <h4>Authentic Expression</h4>
+                    <p>Your story, your truth, permanently etched with the respect and reverence it deserves.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="team-container">
+            <h2>THE COLLECTIVE</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image" data-role="Artist"></div>
+                    <div class="member-info">
+                        <h3>Amelia Kelso</h3>
+                        <div class="member-role">Fine Line Specialist</div>
+                        <p class="member-bio">Master of precision and delicate detail. Amelia transforms subtle visions into breathtaking reality through her internationally recognized fine line technique.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image" data-role="Artist"></div>
+                    <div class="member-info">
+                        <h3>Ben White Raven</h3>
+                        <div class="member-role">Realism Master</div>
+                        <p class="member-bio">A decade of dedication to photorealistic artistry. Ben captures souls in ink, creating tattoos so lifelike they seem to breathe on the skin.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image" data-role="Artist"></div>
+                    <div class="member-info">
+                        <h3>Monique Moore</h3>
+                        <div class="member-role">Dark Aesthetic Specialist</div>
+                        <p class="member-bio">Creator of bold statements and gothic masterpieces. Monique's work explores the beauty in darkness with unapologetic intensity.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image" data-role="Manager"></div>
+                    <div class="member-info">
+                        <h3>Alex Chen</h3>
+                        <div class="member-role">Studio Manager</div>
+                        <p class="member-bio">The orchestrator behind the scenes, ensuring every client experience exceeds expectations from consultation to aftercare.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image" data-role="Apprentice"></div>
+                    <div class="member-info">
+                        <h3>Jordan Rivera</h3>
+                        <div class="member-role">Apprentice Artist</div>
+                        <p class="member-bio">The future of tattoo artistry, learning from masters while developing a unique voice in contemporary tattoo design.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image" data-role="Reception"></div>
+                    <div class="member-info">
+                        <h3>Sam Torres</h3>
+                        <div class="member-role">Client Experience</div>
+                        <p class="member-bio">Your first point of contact and guide through the Berserk experience, ensuring every journey begins with warmth and professionalism.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Achievement Counter -->
+    <section class="achievements">
+        <div class="achievements-container">
+            <div class="achievement-item">
+                <span class="achievement-number" data-target="6500">0</span>
+                <span class="achievement-label">Tattoos Created</span>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-number" data-target="52">0</span>
+                <span class="achievement-label">Awards Won</span>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-number" data-target="8">0</span>
+                <span class="achievement-label">Years of Excellence</span>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-number" data-target="98">0</span>
+                <span class="achievement-label">% Client Satisfaction</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="process-container">
+            <h2>SAFETY & STANDARDS</h2>
+            <div class="process-grid">
+                <div class="process-card">
+                    <h3>Health & Safety</h3>
+                    <ul>
+                        <li>Hospital-grade sterilization protocols</li>
+                        <li>Single-use needles and equipment</li>
+                        <li>Health department certified facility</li>
+                        <li>Continuous air purification systems</li>
+                        <li>Regular third-party safety audits</li>
+                    </ul>
+                </div>
+                <div class="process-card">
+                    <h3>Artist Standards</h3>
+                    <ul>
+                        <li>Minimum 5 years professional experience</li>
+                        <li>Ongoing education and technique refinement</li>
+                        <li>Portfolio review and quality assessment</li>
+                        <li>Client communication excellence</li>
+                        <li>Commitment to artistic integrity</li>
+                    </ul>
+                </div>
+                <div class="process-card">
+                    <h3>Aftercare Excellence</h3>
+                    <ul>
+                        <li>Comprehensive aftercare consultation</li>
+                        <li>Premium healing products included</li>
+                        <li>24/7 aftercare support hotline</li>
+                        <li>Follow-up check-ins</li>
+                        <li>Lifetime touch-up guarantee</li>
+                    </ul>
+                </div>
+                <div class="process-card">
+                    <h3>Client Experience</h3>
+                    <ul>
+                        <li>Personalized consultation process</li>
+                        <li>Custom design collaboration</li>
+                        <li>Comfortable, private studio spaces</li>
+                        <li>Flexible scheduling options</li>
+                        <li>Complete transparency in pricing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <h2>FREQUENTLY ASKED</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How do I book a consultation?
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Booking a consultation is easy through our online system. Click the "Booking" button on any page, select your preferred artist, and choose an available consultation slot. Consultations are $50, which is credited toward your tattoo if you proceed. During the consultation, you'll discuss your ideas, placement, sizing, and receive a custom quote.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How far in advance should I book?
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Our artists typically book 2-3 months in advance, with some availability for smaller pieces sooner. Large-scale projects may require booking 4-6 months ahead. We recommend booking your consultation as soon as you're ready to commit to your tattoo journey, as this secures your place in the queue.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What should I expect to pay?
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Our artists work at premium rates reflecting their expertise and the quality of work. Hourly rates range from $250-$400 depending on the artist and complexity. Most pieces start at $500 minimum. Large-scale projects are quoted as complete packages. We require a 30% deposit to secure your appointment, with payment plans available for extensive work.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Do you accept walk-ins?
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We operate primarily by appointment to ensure each client receives dedicated time and attention. However, we occasionally have same-day availability for smaller pieces. Follow our Instagram @berserk_tattoos for walk-in announcements, or call the studio to check current availability.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What if I need to reschedule?
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We understand plans can change. We require 48 hours notice for rescheduling to avoid forfeiting your deposit. For large-scale appointments, we prefer 72 hours notice. Same-day cancellations result in deposit forfeiture and may affect future booking privileges. We appreciate your understanding as this policy ensures fairness for all clients.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Instagram Feed -->
+    <section class="instagram-section">
+        <div class="instagram-container">
+            <h2>@BERSERK_TATTOOS</h2>
+            <div class="instagram-grid">
+                <div class="instagram-item">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span>❤ 1,234</span>
+                            <span>💬 56</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span>❤ 2,456</span>
+                            <span>💬 89</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span>❤ 3,789</span>
+                            <span>💬 123</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span>❤ 1,567</span>
+                            <span>💬 67</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span>❤ 4,321</span>
+                            <span>💬 156</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span>❤ 2,890</span>
+                            <span>💬 98</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="https://www.instagram.com/berserk_tattoos/" target="_blank" class="follow-btn">FOLLOW OUR JOURNEY</a>
+        </div>
+    </section>
+    
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="contact-content">
+            <h2>READY TO BEGIN?</h2>
+            <p>Whether you're ready to book your masterpiece or just have questions, we're here to guide your journey.</p>
+            <div class="contact-buttons">
+                <a href="index.html#booking" class="cta-primary">BOOK CONSULTATION</a>
+                <a href="tel:0478128212" class="cta-secondary">CALL STUDIO</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-overlay">
+            <h3>FIND US</h3>
+            <div class="location-info">
+                <p><strong>Berserk Tattoos</strong></p>
+                <p>33 Southern Road</p>
+                <p>Heidelberg Heights, VIC 3081</p>
+                <p>Melbourne, Australia</p>
+                <p style="margin-top: 1rem;">📞 0478 128 212</p>
+                <p>✉️ berserk.tattoos.au@gmail.com</p>
+            </div>
+            <a href="https://maps.google.com" target="_blank" class="directions-btn">GET DIRECTIONS</a>
+        </div>
+        <!-- Map placeholder - would integrate Google Maps -->
+        <div style="width: 100%; height: 100%; background: #0a0a0a; opacity: 0.5;"></div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div style="text-align: center; opacity: 0.5;">
+            © 2025 Berserk Tattoos. All Rights Reserved.
+        </div>
+    </footer>
+    
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+        
+        // Achievement Counter Animation
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+        
+        const countUp = (element) => {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+            
+            const updateCount = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCount);
+                } else {
+                    element.textContent = target + (element.parentElement.textContent.includes('%') ? '%' : '+');
+                }
+            };
+            
+            updateCount();
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    entry.target.classList.add('counted');
+                    countUp(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.achievement-number').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Timeline Animation
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.animationDelay = `${index * 0.1}s`;
+                        entry.target.style.opacity = '1';
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            timelineObserver.observe(item);
+        });
+    </script>
+</body>
+</html>
