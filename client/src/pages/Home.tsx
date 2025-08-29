@@ -1,9 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
+﻿import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import InstagramFeed from "@/components/InstagramFeed";
+import Testimonials from "@/components/Testimonials";
+import FacebookPageEmbed from "@/components/FacebookPageEmbed";
 import type { Artist, GalleryItem } from "@shared/schema";
+import { useTitle } from "@/lib/useTitle";
 
 export default function Home() {
+  useTitle("Berserk Tattoos | Melbourne Tattoo Studio");
   const { data: artists = [] } = useQuery<Artist[]>({
     queryKey: ['/api/artists'],
   });
@@ -83,10 +88,12 @@ export default function Home() {
             {/* Hero Image */}
             <div className="relative">
               <div className="w-full h-[600px] bg-gradient-to-br from-[#1a1a1a] to-[#222] relative overflow-hidden transform rotate-2">
-                <img 
-                  src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-                  alt="Professional tattoo studio interior" 
-                  className="w-full h-full object-cover opacity-80" 
+                <img
+                  src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+                  alt="Professional tattoo studio interior"
+                  className="w-full h-full object-cover opacity-80"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute bottom-8 left-8 right-8">
@@ -123,11 +130,13 @@ export default function Home() {
             {featuredItems.map((item) => (
               <div key={item.id} className="bg-[rgba(242,242,242,0.02)] border border-[rgba(242,242,242,0.1)] overflow-hidden hover:border-[#7B1113] hover:transform hover:scale-105 transition-all duration-500 group cursor-pointer">
                 <div className="relative">
-                  <img 
-                    src={item.imageUrl} 
-                    alt={item.title}
-                    className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700" 
-                  />
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
+                />
                   <div className="absolute inset-0 bg-[rgba(123,17,19,0.8)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span className="text-[#F2F2F2] text-sm uppercase tracking-wider">View Project</span>
                   </div>
@@ -151,6 +160,23 @@ export default function Home() {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* Testimonials */}
+      <Testimonials />
+
+      {/* Instagram Feed */}
+      <InstagramFeed handle="berserk_tattoos" profileUrl="https://www.instagram.com/berserk_tattoos/" />
+
+      {/* Facebook Updates */}
+      <section className="py-24 bg-[#111111]">
+        <div className="text-center mb-8">
+          <h2 className="font-cinzel text-[clamp(2.5rem,6vw,4rem)] font-normal mb-6 relative inline-block">
+            Latest From Facebook
+            <span className="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-[60px] h-[3px] bg-[#7B1113]"></span>
+          </h2>
+        </div>
+        <FacebookPageEmbed pageUrl="https://www.facebook.com/BerserkTattoo/" />
       </section>
 
       {/* Artists Section */}
@@ -180,10 +206,12 @@ export default function Home() {
                 ></div>
                 
                 <div className="w-32 h-32 bg-[#333] rounded-full mx-auto mb-6 relative overflow-hidden">
-                  <img 
-                    src={artist.profileImage} 
+                  <img
+                    src={artist.profileImage}
                     alt={`${artist.name} - ${artist.specialty}`}
-                    className="w-full h-full object-cover" 
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 

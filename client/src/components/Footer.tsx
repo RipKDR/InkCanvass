@@ -1,4 +1,6 @@
 import { Link } from "wouter";
+import SocialLinks from "@/components/SocialLinks";
+import { studio } from "@/content/studio";
 
 export default function Footer() {
   return (
@@ -6,10 +8,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <div className="text-cinzel text-2xl tracking-wider mb-4">BERSERK</div>
+            <div className="text-cinzel text-2xl tracking-wider mb-4">{studio.name.toUpperCase()}</div>
             <p className="opacity-80 leading-relaxed">
-              Melbourne's premier tattoo studio, crafting exceptional art since 2010.
+              Melbourne's premier tattoo studio. Exceptional artistry. Professional care.
             </p>
+            <div className="mt-4">
+              <SocialLinks items={studio.socials} />
+            </div>
           </div>
           
           <div>
@@ -43,16 +48,27 @@ export default function Footer() {
           <div>
             <h4 className="font-medium mb-4">Contact</h4>
             <div className="space-y-2 opacity-80">
-              <div>33 Southern Road</div>
-              <div>Heidelberg Heights VIC 3081</div>
-              <div>+61 478 128 212</div>
-              <div>hello@berserktattoos.com.au</div>
+              <a href={studio.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="block hover:text-red-800 transition-colors">
+                {studio.address}
+              </a>
+              <a href={`tel:${studio.phone.replace(/\s+/g, '')}`} className="block hover:text-red-800 transition-colors">
+                {studio.phone}
+              </a>
+              <a href={`mailto:${studio.email}`} className="block hover:text-red-800 transition-colors">
+                {studio.email}
+              </a>
+              <div className="pt-2">
+                <div className="text-sm opacity-60">Hours</div>
+                {studio.hours.map((h) => (
+                  <div key={h.day} className="text-sm opacity-70">{h.day}: {h.time}</div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
         
         <div className="border-t border-red-900/20 pt-8 mt-8 text-center opacity-60">
-          <p>&copy; 2024 Berserk Tattoos. All rights reserved. | Privacy Policy | Terms of Service</p>
+          <p>&copy; 2024 {studio.name}. All rights reserved. | Privacy Policy | Terms of Service</p>
         </div>
       </div>
     </footer>

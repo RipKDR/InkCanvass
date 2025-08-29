@@ -1,9 +1,15 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { GalleryItem, Artist } from "@shared/schema";
+import useGalleryQuickView from "@/components/GalleryQuickView";
+import { useTitle } from "@/lib/useTitle";
+import { Search } from "lucide-react";
+import InstagramFeed from "@/components/InstagramFeed";
+import { studio } from "@/content/studio";
 
 export default function Gallery() {
+  useTitle("Berserk Tattoos | Gallery");
   const [activeFilter, setActiveFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   
@@ -24,6 +30,8 @@ export default function Gallery() {
       item.style.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesFilter && matchesSearch;
   });
+
+  const { openItem, QuickView } = useGalleryQuickView({ items: filteredItems, artists });
 
   const getArtistName = (artistId: string) => {
     const artist = artists.find(a => a.id === artistId);
@@ -98,7 +106,9 @@ export default function Gallery() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-6 pr-12 py-3 bg-[rgba(242,242,242,0.05)] border border-[rgba(242,242,242,0.1)] text-[#F2F2F2] text-sm tracking-wide focus:outline-none focus:border-[#7B1113] focus:bg-[rgba(123,17,19,0.05)] transition-all duration-300"
               />
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-lg opacity-50">⌕</div>
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-lg opacity-50">
+                <Search className="w-5 h-5" />
+              </div>
             </div>
 
             {/* View Modes */}
@@ -137,12 +147,16 @@ export default function Gallery() {
           {filteredItems.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {filteredItems.map((item) => (
-                <div key={item.id} className="bg-[rgba(242,242,242,0.02)] border border-[rgba(242,242,242,0.1)] overflow-hidden hover:border-[#7B1113] hover:transform hover:scale-105 transition-all duration-500 group cursor-pointer">
+                <div key={item.id} className="bg-[rgba(242,242,242,0.02)] border border-[rgba(242,242,242,0.1)] overflow-hidden hover:border-[#7B1113] hover:transform hover:scale-105 transition-all duration-500 group cursor-pointer" onClick={() => openItem(item)}>
                   <div className="relative">
-                    <img 
-                      src={item.imageUrl} 
+                    <img
+                      src={item.imageUrl}
                       alt={item.title}
-                      className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700" 
+                      className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                      loading="lazy"
+                      decoding="async"
+                      width={600}
+                      height={320}
                     />
                     <div className="absolute inset-0 bg-[rgba(123,17,19,0.9)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-6">
                       <h4 className="text-[#F2F2F2] font-medium text-lg mb-2">{item.title}</h4>
@@ -187,6 +201,38 @@ export default function Gallery() {
               </button>
             </div>
           )}
+          {QuickView}
+        </div>
+      </section>
+
+      {/* Latest from Instagram */}
+      <section className="py-24 bg-[#0a0a0a]">
+        <div className="max-w-[1600px] mx-auto px-[5%]">
+          <div className="text-center mb-12">
+            <h2 className="font-cinzel text-[clamp(2.5rem,6vw,4rem)] font-normal mb-6 relative inline-block">
+              Latest from Instagram
+              <span className="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-[60px] h-[3px] bg-[#7B1113]"></span>
+            </h2>
+            <p className="text-xl opacity-80 max-w-3xl mx-auto leading-relaxed">
+              Fresh work from our artists’ Instagram profiles.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-12">
+            {studio.artists.map((a) => {
+              const insta = a.socials.find((s) => s.label.toLowerCase().includes('instagram'));
+              if (!insta) return null;
+              const match = insta.url.match(/instagram\.com\/(.+?)(\/|$)/i);
+              const handle = match ? match[1] : undefined;
+              if (!handle) return null;
+              return (
+                <div key={a.name}>
+                  <h3 className="font-cinzel text-2xl mb-4">{a.name.split(' ')[0]}'s Feed</h3>
+                  <InstagramFeed title="" handle={handle} profileUrl={insta.url} limit={6} />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
     </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ExternalLink } from "lucide-react";
+import { studio } from "@/content/studio";
 import { Button } from "@/components/ui/button";
 
 export default function Navigation() {
@@ -46,6 +47,7 @@ export default function Navigation() {
                 className={`text-sm uppercase tracking-wider transition-colors relative group ${
                   location === href ? 'text-red-800' : 'text-zinc-50 hover:text-red-800'
                 }`}
+                aria-current={location === href ? 'page' : undefined}
               >
                 {label}
                 <span className={`absolute bottom-0 left-0 h-px bg-red-800 transition-all duration-300 ${
@@ -53,11 +55,12 @@ export default function Navigation() {
                 }`}></span>
               </Link>
             ))}
-            <Link href="/booking">
-              <Button className="bg-red-800 hover:bg-red-700 text-zinc-50 px-8 py-3 text-sm uppercase tracking-wider hover:shadow-xl hover:shadow-red-800/30 hover:-translate-y-1 transition-all duration-300">
+            <a href={studio.bookingUrl} target="_blank" rel="noopener noreferrer">
+              <Button className="bg-red-800 hover:bg-red-700 text-zinc-50 px-8 py-3 text-sm uppercase tracking-wider hover:shadow-xl hover:shadow-red-800/30 hover:-translate-y-1 transition-all duration-300 inline-flex items-center gap-2">
                 Book Now
+                <ExternalLink className="w-4 h-4" />
               </Button>
-            </Link>
+            </a>
           </div>
           
           {/* Mobile Menu Button */}
@@ -89,11 +92,12 @@ export default function Navigation() {
                   {label}
                 </Link>
               ))}
-              <Link href="/booking" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="bg-red-800 hover:bg-red-700 text-zinc-50 w-full text-sm uppercase tracking-wider">
+              <a href={studio.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button className="bg-red-800 hover:bg-red-700 text-zinc-50 w-full text-sm uppercase tracking-wider inline-flex items-center justify-center gap-2">
                   Book Now
+                  <ExternalLink className="w-4 h-4" />
                 </Button>
-              </Link>
+              </a>
             </div>
           </div>
         )}

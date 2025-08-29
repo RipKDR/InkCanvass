@@ -1,11 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+﻿import { useQuery } from "@tanstack/react-query";
 import { useRoute, Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Artist, GalleryItem } from "@shared/schema";
+import SocialLinks from "@/components/SocialLinks";
+import { studio } from "@/content/studio";
+import InstagramFeed from "@/components/InstagramFeed";
+import { useTitle } from "@/lib/useTitle";
 
 export default function ArtistProfile() {
+  useTitle("Berserk Tattoos | Artist");
   const [match, params] = useRoute("/artists/:id");
   const artistId = params?.id;
 
@@ -15,7 +20,7 @@ export default function ArtistProfile() {
   });
 
   const { data: galleryItems = [], isLoading: galleryLoading } = useQuery<GalleryItem[]>({
-    queryKey: ['/api/gallery', { artist: artistId }],
+    queryKey: [`/api/gallery?artist=${artistId}`],
     enabled: !!artistId,
   });
 
@@ -52,6 +57,7 @@ export default function ArtistProfile() {
 
   return (
     <div className="min-h-screen">
+      
       {/* Artist Hero */}
       <section className="pt-40 pb-20 bg-[#0a0a0a] relative overflow-hidden">
         <div className="absolute top-1/2 -right-20 transform -translate-y-1/2 rotate-90 text-[15rem] opacity-[0.02] font-cinzel tracking-[0.3em] select-none whitespace-nowrap">
@@ -71,10 +77,14 @@ export default function ArtistProfile() {
                 <div className="w-0 h-1 group-hover:w-full transition-all duration-500 bg-[#7B1113] mb-8"></div>
                 
                 <div className="aspect-square bg-[rgba(242,242,242,0.1)] relative overflow-hidden mb-6">
-                  <img 
-                    src={artist.profileImage} 
+                  <img
+                    src={artist.profileImage}
                     alt={`${artist.name} - ${artist.specialty}`}
                     className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700"
+                    loading="lazy"
+                    decoding="async"
+                    width={800}
+                    height={800}
                   />
                   
                   {/* Overlay */}
@@ -91,7 +101,7 @@ export default function ArtistProfile() {
                 {/* Experience Stats */}
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center">
-                    <div className="font-cinzel text-3xl text-[#7B1113] mb-2">{artist.experienceYears}+</div>
+                    <div className="font-cinzel text-3xl text-[#7B1113] mb-2">{artist.yearsExperience}+</div>
                     <div className="text-sm opacity-60 uppercase tracking-wider">Years Experience</div>
                   </div>
                   <div className="text-center">
@@ -117,6 +127,12 @@ export default function ArtistProfile() {
                 <p className="text-lg opacity-80 leading-relaxed">
                   {artist.bio}
                 </p>
+                <div>
+                  <h3 className="font-cinzel text-xl mb-3">Connect</h3>
+                  <SocialLinks
+                    items={(studio.artists.find((a) => a.name === artist.name)?.socials ?? [])}
+                  />
+                </div>
                 
                 {/* Specialties */}
                 <div>
@@ -188,10 +204,14 @@ export default function ArtistProfile() {
               {galleryItems.map((item) => (
                 <div key={item.id} className="bg-[rgba(242,242,242,0.02)] border border-[rgba(242,242,242,0.1)] overflow-hidden hover:border-[#7B1113] transition-all duration-500 group">
                   <div className="aspect-square bg-[rgba(242,242,242,0.1)] relative overflow-hidden">
-                    <img 
-                      src={item.imageUrl} 
+                    <img
+                      src={item.imageUrl}
                       alt={item.title}
                       className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
+                      loading="lazy"
+                      decoding="async"
+                      width={800}
+                      height={800}
                     />
                     
                     {/* Hover Overlay */}
@@ -200,16 +220,18 @@ export default function ArtistProfile() {
                     {/* Hover Info */}
                     <div className="absolute bottom-6 left-6 right-6 transform translate-y-6 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
                       <h3 className="font-cinzel text-lg mb-2">{item.title}</h3>
-                      <p className="text-sm opacity-70">{item.category}</p>
+                      <p className="text-sm opacity-70">{item.style}</p>
                     </div>
                   </div>
                   
                   <div className="p-6">
                     <h3 className="font-medium mb-2">{item.title}</h3>
-                    <p className="text-sm opacity-70 mb-4">{item.description}</p>
+                    {item.description && (
+                      <p className="text-sm opacity-70 mb-4">{item.description}</p>
+                    )}
                     <div className="flex justify-between items-center text-sm">
-                      <span className="text-[#7B1113]">{item.category}</span>
-                      <span className="opacity-60">{new Date(item.createdAt).getFullYear()}</span>
+                      <span className="text-[#7B1113]">{item.style}</span>
+                      <span className="opacity-60">{item.createdAt ? new Date(item.createdAt).getFullYear() : ''}</span>
                     </div>
                   </div>
                 </div>
@@ -218,7 +240,7 @@ export default function ArtistProfile() {
           ) : (
             <div className="text-center py-16">
               <div className="w-20 h-20 bg-[rgba(123,17,19,0.1)] rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl">🎨</span>
+                <span className="text-3xl">ðŸŽ¨</span>
               </div>
               <h3 className="font-cinzel text-xl mb-4">Portfolio Coming Soon</h3>
               <p className="opacity-70">Check back soon to see {artist.name}'s latest work.</p>
@@ -226,6 +248,23 @@ export default function ArtistProfile() {
           )}
         </div>
       </section>
+
+      {/* Artist Instagram Feed */}
+      {(() => {
+        const instaUrl = studio.artists.find((a) => a.name === artist.name)?.socials.find((s) => s.label.toLowerCase().includes("instagram"))?.url;
+        if (!instaUrl) return null;
+        const match = instaUrl.match(/instagram\.com\/(.+?)(\/|$)/i);
+        const handle = match ? match[1] : undefined;
+        if (!handle) return null;
+        return (
+          <InstagramFeed
+            title={`${artist.name.split(' ')[0]} on Instagram`}
+            handle={handle}
+            profileUrl={instaUrl}
+            limit={8}
+          />
+        );
+      })()}
 
       {/* Contact Artist */}
       <section className="py-24 bg-[#0a0a0a] text-center">
@@ -256,6 +295,25 @@ export default function ArtistProfile() {
           </div>
         </div>
       </section>
+      {(() => {
+        const socials = studio.artists.find((a) => a.name === artist.name)?.socials.map((s) => s.url) || [];
+        const person = {
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: artist.name,
+          jobTitle: artist.specialty,
+          worksFor: { '@type': 'TattooParlor', name: 'Berserk Tattoos' },
+          sameAs: socials,
+        };
+        return (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
+        );
+      })()}
     </div>
   );
 }
+
+
+
+
+

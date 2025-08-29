@@ -1,9 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
+﻿import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Artist } from "@shared/schema";
+import SocialLinks from "@/components/SocialLinks";
+import { studio } from "@/content/studio";
+import { useTitle } from "@/lib/useTitle";
+import InstagramFeed from "@/components/InstagramFeed";
 
 export default function Artists() {
+  useTitle("Berserk Tattoos | Master Artists");
   const { data: artists = [], isLoading } = useQuery<Artist[]>({
     queryKey: ['/api/artists'],
   });
@@ -81,10 +86,14 @@ export default function Artists() {
                   <div className="p-8">
                     <div className="relative w-48 h-48 mx-auto mb-8">
                       <div className="w-full h-full bg-[#333] rounded-full overflow-hidden border-2 border-[rgba(242,242,242,0.1)] group-hover:border-opacity-100 transition-all duration-300" style={{borderColor: `${artist.themeColor}50`}}>
-                        <img 
-                          src={artist.profileImage} 
+                        <img
+                          src={artist.profileImage}
                           alt={`${artist.name} - Master Tattoo Artist`}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          loading="lazy"
+                          decoding="async"
+                          width={192}
+                          height={192}
                         />
                       </div>
                       
@@ -92,6 +101,13 @@ export default function Artists() {
                       <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-[#111111] border border-[rgba(242,242,242,0.2)] px-4 py-2 text-xs uppercase tracking-wider" style={{color: artist.themeColor}}>
                         Master Artist
                       </div>
+                    </div>
+
+                    {/* Socials */}
+                    <div className="mt-6">
+                      <SocialLinks
+                        items={(studio.artists.find((a) => a.name === artist.name)?.socials ?? [])}
+                      />
                     </div>
                     
                     {/* Artist Info */}
@@ -112,7 +128,7 @@ export default function Artists() {
                         <div className="text-xs opacity-60 uppercase tracking-wider">Pieces</div>
                       </div>
                       <div className="text-center p-4 bg-[rgba(242,242,242,0.02)] border border-[rgba(242,242,242,0.1)]">
-                        <div className="font-cinzel text-2xl mb-1" style={{color: artist.themeColor}}>★★★★★</div>
+                        <div className="font-cinzel text-2xl mb-1" style={{color: artist.themeColor}}>â˜…â˜…â˜…â˜…â˜…</div>
                         <div className="text-xs opacity-60 uppercase tracking-wider">Rating</div>
                       </div>
                     </div>
@@ -205,6 +221,34 @@ export default function Artists() {
           </div>
         </div>
       </section>
+
+      {/* Latest From Instagram */}
+      <section className="py-24 bg-[#111111]">
+        <div className="max-w-[1600px] mx-auto px-[5%]">
+          <div className="text-center mb-12">
+            <h2 className="font-cinzel text-[clamp(2.5rem,6vw,4rem)] font-normal mb-6 relative inline-block">
+              Latest From Instagram
+              <span className="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-[60px] h-[3px] bg-[#7B1113]"></span>
+            </h2>
+          </div>
+          <div className="grid gap-16 lg:grid-cols-3">
+            {studio.artists.map((a) => {
+              const insta = a.socials.find((s) => s.label.toLowerCase().includes('instagram'));
+              if (!insta) return null;
+              const match = insta.url.match(/instagram\.com\/(.+?)(\/|$)/i);
+              const handle = match ? match[1] : undefined;
+              if (!handle) return null;
+              return (
+                <div key={a.name}>
+                  <h3 className="font-cinzel text-2xl mb-4">{a.name.split(' ')[0]}'s Feed</h3>
+                  <InstagramFeed title="" handle={handle} profileUrl={insta.url} limit={6} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+

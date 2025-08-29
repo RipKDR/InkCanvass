@@ -1,6 +1,9 @@
 import { Link } from "wouter";
+import { useTitle } from "@/lib/useTitle";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 export default function Services() {
+  useTitle("Berserk Tattoos | Services");
   return (
     <div className="min-h-screen">
       {/* Services Hero */}
@@ -316,6 +319,61 @@ export default function Services() {
               </button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* FAQs */}
+      <section className="py-24 bg-[#0a0a0a]">
+        <div className="max-w-[900px] mx-auto px-[5%]">
+          <h2 className="font-cinzel text-[clamp(2rem,5vw,3rem)] font-normal mb-6">Frequently Asked Questions</h2>
+          <Accordion type="single" collapsible className="text-left">
+            <AccordionItem value="q1">
+              <AccordionTrigger>How do I book a consultation?</AccordionTrigger>
+              <AccordionContent>
+                You can book online via our HeyGoldie link or use the booking form on our site. For complex pieces, include style, size, placement, and reference images.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q2">
+              <AccordionTrigger>Do you require a deposit?</AccordionTrigger>
+              <AccordionContent>
+                Yes. Deposits secure your appointment and are deducted from the final cost. Deposits are non‑refundable but transferable with 48 hours notice.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q3">
+              <AccordionTrigger>What are the age requirements?</AccordionTrigger>
+              <AccordionContent>
+                We only tattoo clients 18+ with valid photo ID. No exceptions.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q4">
+              <AccordionTrigger>How painful is it?</AccordionTrigger>
+              <AccordionContent>
+                Pain varies by placement and individual tolerance. We take breaks and use professional techniques to keep you comfortable.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q5">
+              <AccordionTrigger>How should I care for my new tattoo?</AccordionTrigger>
+              <AccordionContent>
+                Keep it clean and moisturized, avoid soaking and direct sun while healing. We’ll provide tailored aftercare instructions before you leave.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                mainEntity: [
+                  { '@type': 'Question', name: 'How do I book a consultation?', acceptedAnswer: { '@type': 'Answer', text: 'Book online via HeyGoldie or our booking form. Include style, size, placement, and references.' } },
+                  { '@type': 'Question', name: 'Do you require a deposit?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Deposits secure your appointment and count toward your total. Non‑refundable; transferable with 48 hours notice.' } },
+                  { '@type': 'Question', name: 'What are the age requirements?', acceptedAnswer: { '@type': 'Answer', text: 'We only tattoo clients 18+ with valid photo ID.' } },
+                  { '@type': 'Question', name: 'How painful is it?', acceptedAnswer: { '@type': 'Answer', text: 'Pain varies by placement and tolerance. We work to keep you comfortable.' } },
+                  { '@type': 'Question', name: 'How should I care for my new tattoo?', acceptedAnswer: { '@type': 'Answer', text: 'Keep it clean and moisturized, avoid soaking/sun while healing. Aftercare provided in studio.' } }
+                ]
+              })
+            }}
+          />
         </div>
       </section>
     </div>

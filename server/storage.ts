@@ -50,7 +50,7 @@ export class MemStorage implements IStorage {
       yearsExperience: 8,
       totalPieces: 450,
       themeColor: "#C4A484",
-      profileImage: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
+      profileImage: "https://unavatar.io/instagram/amzkelso",
       skills: ["Fine Line", "Minimalist", "Botanical", "Geometric"],
       createdAt: new Date(),
     };
@@ -63,7 +63,7 @@ export class MemStorage implements IStorage {
       yearsExperience: 12,
       totalPieces: 600,
       themeColor: "#8B9DC3",
-      profileImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
+      profileImage: "https://unavatar.io/instagram/ben_whiteraven",
       skills: ["Realism", "Portraits", "Animals", "Color Work"],
       createdAt: new Date(),
     };
@@ -76,7 +76,7 @@ export class MemStorage implements IStorage {
       yearsExperience: 10,
       totalPieces: 520,
       themeColor: "#7B1113",
-      profileImage: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
+      profileImage: "https://unavatar.io/instagram/moniquemoore666",
       skills: ["Blackwork", "Gothic", "Traditional", "Bold Designs"],
       createdAt: new Date(),
     };
@@ -159,7 +159,13 @@ export class MemStorage implements IStorage {
 
   async createArtist(insertArtist: InsertArtist): Promise<Artist> {
     const id = randomUUID();
-    const artist: Artist = { ...insertArtist, id, createdAt: new Date() };
+    const artist: Artist = {
+      ...insertArtist,
+      // Ensure types align with inferred select types
+      skills: (insertArtist.skills as unknown as string[]),
+      id,
+      createdAt: new Date(),
+    };
     this.artists.set(id, artist);
     return artist;
   }
@@ -179,7 +185,12 @@ export class MemStorage implements IStorage {
 
   async createGalleryItem(insertItem: InsertGalleryItem): Promise<GalleryItem> {
     const id = randomUUID();
-    const item: GalleryItem = { ...insertItem, id, createdAt: new Date() };
+    const item: GalleryItem = {
+      ...insertItem,
+      description: insertItem.description ?? null,
+      id,
+      createdAt: new Date(),
+    };
     this.galleryItems.set(id, item);
     return item;
   }
@@ -191,11 +202,13 @@ export class MemStorage implements IStorage {
 
   async createBooking(insertBooking: InsertBooking): Promise<Booking> {
     const id = randomUUID();
-    const booking: Booking = { 
-      ...insertBooking, 
-      id, 
-      status: "pending", 
-      createdAt: new Date() 
+    const booking: Booking = {
+      ...insertBooking,
+      preferredArtist: insertBooking.preferredArtist ?? null,
+      styles: insertBooking.styles as string[],
+      id,
+      status: "pending",
+      createdAt: new Date(),
     };
     this.bookings.set(id, booking);
     return booking;

@@ -9,6 +9,8 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Artist } from "@shared/schema";
+import { studio } from "@/content/studio";
+import { useTitle } from "@/lib/useTitle";
 
 const bookingSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -29,6 +31,7 @@ const bookingSchema = z.object({
 type BookingForm = z.infer<typeof bookingSchema>;
 
 export default function Booking() {
+  useTitle("Berserk Tattoos | Book a Consultation");
   const [currentStep, setCurrentStep] = useState(1);
   const { toast } = useToast();
 
@@ -55,10 +58,34 @@ export default function Booking() {
   const hasTattoos = watch("hasTattoos");
 
   const bookingMutation = useMutation({
-    mutationFn: (data: BookingForm) => apiRequest("/api/bookings", {
-      method: "POST",
-      body: JSON.stringify(data),
-    }),
+    mutationFn: async (data: BookingForm) => {
+      const [firstName, ...rest] = data.name.trim().split(/\s+/);
+      const lastName = rest.join(" ") || "N/A";
+
+      const descriptionExtras = [
+        data.tattooSize ? `Size: ${data.tattooSize}` : null,
+        data.placement ? `Placement: ${data.placement}` : null,
+        data.preferredDate ? `Preferred Date: ${data.preferredDate}` : null,
+        data.hasAllergies ? `Allergies: ${data.allergies || "Yes"}` : null,
+        data.hasTattoos ? "Has previous tattoos" : null,
+        data.budget ? `Budget: ${data.budget}` : null,
+      ].filter(Boolean).join(" | ");
+
+      const payload = {
+        firstName,
+        lastName,
+        email: data.email,
+        phone: data.phone,
+        preferredArtist: data.preferredArtist || null,
+        styles: [data.tattooStyle],
+        description: descriptionExtras
+          ? `${data.description}\n\n---\n${descriptionExtras}`
+          : data.description,
+      };
+
+      const res = await apiRequest("POST", "/api/bookings", payload);
+      return res.json();
+    },
     onSuccess: () => {
       toast({
         title: "Booking Submitted!",
@@ -122,6 +149,9 @@ export default function Booking() {
             Ready to bring your vision to life? Complete our booking form to schedule your consultation 
             with one of our master artists. We'll work together to create something extraordinary.
           </p>
+          <div className="text-sm opacity-80 -mt-8 mb-12">
+            Prefer a quick booking? <a href={studio.bookingUrl} target="_blank" rel="noopener noreferrer" className="text-[#7B1113] hover:underline">Book via HeyGoldie</a>.
+          </div>
           
           {/* Process Steps */}
           <div className="flex justify-center items-center gap-8 pt-12 border-t border-[rgba(242,242,242,0.1)]">
