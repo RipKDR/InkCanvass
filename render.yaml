@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: berserk-tattoos
+    env: node
+    rootDir: .
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+
