@@ -1,153 +1,88 @@
-# Berserk Tattoos - Tattoo Studio Website
+# Berserk Tattoos – Studio Website
 
-A modern full-stack tattoo studio website built with React, Express, and PostgreSQL.
+A modern, full‑stack tattoo studio website (React + Vite + Tailwind on the client, Express on the server). It includes artist pages, gallery, booking flow, Instagram + Facebook embeds, and SEO/accessibility upgrades.
 
-## 🚀 Quick Start
+<a href="https://render.com/deploy?repo=https://github.com/RipKDR/InkCanvass">
+  <img alt="Deploy to Render" src="https://render.com/images/deploy-to-render-button.svg" height="32" />
+</a>
 
-### Prerequisites
+## Features
 
-- **Node.js** (v18 or higher)
-- **npm** or **yarn**
-- **PostgreSQL** database (local or cloud)
+- Artists, Gallery, Services, Booking, Contact pages
+- Centralized studio data (address, hours, socials)
+- Instagram feeds (shop + per‑artist) with graceful fallback
+- Facebook Page embed on Home
+- Gallery Quick‑View dialog with CTAs
+- Mobile floating “Book Now” button
+- SEO: titles, meta, Open Graph, LocalBusiness + Person JSON‑LD, sitemap/robots
+- Accessibility: skip link, prefers‑reduced‑motion, keyboard‑friendly dialogs
+- Optional Analytics (GA4/Plausible)
 
-### 1. Quick Start (Recommended)
+## Quick Start (dev)
 
-**Windows:**
-```bash
+```
 cd InkCanvas
-start.bat
-```
-
-**Mac/Linux:**
-```bash
-cd InkCanvas
-./start.sh
-```
-
-**Manual Setup:**
-```bash
-cd InkCanvas
-npm run setup
-```
-
-### 2. Set Up Environment Variables
-
-The setup scripts will automatically create a `.env` file from `env.example`. Edit `.env` and set your database connection:
-
-```env
-DATABASE_URL=postgresql://username:password@localhost:5432/berserk_tattoos
-PORT=5000
-NODE_ENV=development
-```
-
-### 3. Set Up Database
-
-#### Option A: Local PostgreSQL
-1. Install PostgreSQL on your system
-2. Create a database named `berserk_tattoos`
-3. Update the `DATABASE_URL` in your `.env` file
-
-#### Option B: Cloud Database (Recommended)
-- **Neon** (Free tier available): https://neon.tech
-- **Supabase** (Free tier available): https://supabase.com
-- **Railway**: https://railway.app
-
-### 4. Run Database Migrations
-
-```bash
-npm run db:push
-```
-
-### 5. Start Development Server
-
-```bash
+npm install
 npm run dev
+# http://localhost:5000
 ```
 
-The application will be available at `http://localhost:5000`
+## Build & Run (production)
 
-## 📁 Project Structure
+```
+npm run build
+npm start
+# http://localhost:5000
+```
+
+## Environment Variables (optional)
+
+Copy `env.example` → `.env` and set values as needed.
+
+- Instagram (live media)
+  - `INSTAGRAM_USER_ID`, `INSTAGRAM_ACCESS_TOKEN`, `INSTAGRAM_LIMIT`
+  - `INSTAGRAM_AMZKELSO_USER_ID`, `INSTAGRAM_AMZKELSO_ACCESS_TOKEN`
+  - `INSTAGRAM_BEN_WHITERAVEN_USER_ID`, `INSTAGRAM_BEN_WHITERAVEN_ACCESS_TOKEN`
+  - `INSTAGRAM_MONIQUEMOORE666_USER_ID`, `INSTAGRAM_MONIQUEMOORE666_ACCESS_TOKEN`
+- Admin ingest route: `ADMIN_SECRET`
+- Analytics (client): `VITE_ANALYTICS_PROVIDER`, `VITE_GA_MEASUREMENT_ID`, `VITE_PLAUSIBLE_DOMAIN`
+
+## Deploy (Render)
+
+Click the Deploy button above or:
+
+1. Create a new Blueprint on Render and connect this repo
+2. Root directory: `InkCanvas`
+3. Build: `npm install && npm run build`
+4. Start: `npm start`
+5. Add any `.env` values (see above)
+6. Deploy and share the public URL
+
+## Project Structure
 
 ```
 InkCanvas/
-├── client/                 # React frontend
-│   ├── src/
-│   │   ├── components/     # UI components
-│   │   ├── pages/         # Page components
-│   │   ├── hooks/         # Custom React hooks
-│   │   └── lib/           # Utility functions
-├── server/                # Express backend
-│   ├── index.ts          # Server entry point
-│   ├── routes.ts         # API routes
-│   └── storage.ts        # Database operations
-├── shared/               # Shared types and schemas
-│   └── schema.ts         # Database schema
-└── attached_assets/      # Static assets
+  client/            # React app (Vite + Tailwind)
+  server/            # Express server + routes
+  shared/            # Shared types/schema
+  dist/              # Production build output
+  render.yaml        # Render blueprint
+  Dockerfile         # Container build (optional)
+  Procfile           # Proc manager (optional)
 ```
 
-## 🛠️ Available Scripts
+## Instagram Integrations
 
-- `npm run setup` - Initial project setup
-- `npm run dev` - Start development server
-- `npm run start:dev` - Start with database connection check
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run db:push` - Push database schema changes
-- `npm run db:seed` - Add sample data to database
-- `npm run check` - Type check the codebase
+- Feed proxy endpoint: `GET /api/instagram?handle=<handle>&limit=8` (cached 10 minutes)
+- UI components automatically pull handles from `studio.ts` socials
+- If tokens are not set, the UI shows a “Follow on Instagram” CTA instead of media
 
-## 🎨 Features
+Import latest IG posts into gallery (memory storage)
 
-- **Artist Profiles**: Showcase tattoo artists with portfolios
-- **Gallery**: Browse tattoo artwork by style and artist
-- **Booking System**: Schedule tattoo appointments
-- **Contact Form**: Get in touch with the studio
-- **Responsive Design**: Works on all devices
-- **Dark Theme**: Edgy, professional aesthetic
-
-## 🗄️ Database Schema
-
-The application uses PostgreSQL with the following main tables:
-
-- **artists**: Artist profiles and information
-- **gallery_items**: Tattoo artwork and portfolio pieces
-- **bookings**: Client appointment requests
-- **contacts**: Contact form submissions
-
-## 🚀 Deployment
-
-### Production Build
-
-```bash
-npm run build
-npm run start
+```
+curl -X POST http://localhost:5000/api/admin/ingest-instagram \
+  -H "Authorization: Bearer $ADMIN_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"handle":"amzkelso","limit":12}'
 ```
 
-### Environment Variables for Production
-
-```env
-DATABASE_URL=your_production_database_url
-NODE_ENV=production
-PORT=5000
-```
-
-## 🛠️ Technology Stack
-
-- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS
-- **Backend**: Express.js, TypeScript, Drizzle ORM
-- **Database**: PostgreSQL
-- **UI Components**: shadcn/ui, Radix UI
-- **State Management**: TanStack Query
-- **Forms**: React Hook Form with Zod validation
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## 📄 License
-
-MIT License - see LICENSE file for details
