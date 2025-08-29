@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Artists - Master Tattoo Artists | Berserk Tattoos Melbourne</title>
+    <meta property="og:title" content="Our Artists - Berserk Tattoos Melbourne">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://berserktattoos.com/artists.html">
+    <link rel="canonical" href="https://berserktattoos.com/artists.html">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="description" content="Meet Melbourne's finest tattoo artists at Berserk Tattoos. Discover Amelia Kelso's fine line mastery, Ben White Raven's realism expertise, and Monique Moore's bold blackwork.">
     <meta name="keywords" content="tattoo artists melbourne, fine line tattoo artist, realism tattoo artist, blackwork artist, custom tattoo artist melbourne">
     
@@ -11,6 +16,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Shared styles/scripts -->
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="main.js"></script>
     
     <style>
         /* Global Styles */
@@ -56,7 +64,7 @@
             color: var(--color-light);
             line-height: 1.6;
             overflow-x: hidden;
-            cursor: crosshair;
+            /* cursor overridden by shared CSS for usability */
             -webkit-font-smoothing: antialiased;
         }
         
@@ -878,11 +886,12 @@
                 <a href="about.html">ABOUT</a>
                 <a href="index.html#contact">CONTACT</a>
             </div>
-            <div class="mobile-menu" id="mobile-menu">
+            <button class="mobile-menu mobile-toggle" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                <span class="visually-hidden">Toggle menu</span>
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </nav>
     </div>
     

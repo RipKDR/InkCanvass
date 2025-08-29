@@ -13,11 +13,22 @@
     <meta property="og:image" content="https://berserktattoos.com/og-image.jpg">
     <meta property="og:url" content="https://berserktattoos.com">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Berserk Tattoos">
+
+    <!-- Canonical & Twitter -->
+    <link rel="canonical" href="https://berserktattoos.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Berserk Tattoos - Melbourne's Premier Tattoo Artists">
+    <meta name="twitter:description" content="Where rebellion meets refinement. Experience exceptional tattoo artistry from Melbourne's finest artists.">
+    <meta name="twitter:image" content="https://berserktattoos.com/og-image.jpg">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Shared styles/scripts -->
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="main.js"></script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -26,10 +37,11 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "TattooShop",
+      "@type": "TattooParlor",
       "name": "Berserk Tattoos",
       "image": "https://berserktattoos.com/logo.jpg",
       "description": "Melbourne's premier tattoo studio specializing in custom artwork",
+      "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "33 Southern Road",
@@ -40,7 +52,15 @@
       },
       "telephone": "+61478128212",
       "url": "https://berserktattoos.com",
-      "openingHours": "Mo-Su 12:00-19:00"
+      "hasMap": "https://maps.google.com/?q=33+Southern+Road+Heidelberg+Heights+VIC+3081",
+      "openingHoursSpecification": [
+        {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "12:00", "closes": "19:00"},
+        {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "12:00", "closes": "17:00"}
+      ],
+      "sameAs": [
+        "https://www.instagram.com/berserk_tattoos/",
+        "https://www.facebook.com/BerserkTattoo/"
+      ]
     }
     </script>
     
@@ -1113,11 +1133,12 @@
                 <a href="about.html">ABOUT</a>
                 <a href="#contact">CONTACT</a>
             </div>
-            <div class="mobile-menu" id="mobile-menu">
+            <button class="mobile-menu mobile-toggle" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                <span class="visually-hidden">Toggle menu</span>
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </nav>
     </div>
     
@@ -1328,6 +1349,11 @@
                 </ul>
             </div>
         </div>
+        <!-- Map Embed -->
+        <div style="max-width:1600px;margin:0 auto var(--space-xl);padding:0 5%;">
+            <iframe class="map-embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" 
+                src="https://www.google.com/maps?q=33+Southern+Road+Heidelberg+Heights+VIC+3081&output=embed"></iframe>
+        </div>
         <div class="footer-bottom">
             <div>© 2025 Berserk Tattoos. All Rights Reserved.</div>
             <div>
@@ -1339,69 +1365,12 @@
     </footer>
 
     <script>
-        // Navigation scroll effect
+        // Keep navbar scroll effect (other behavior moved to main.js)
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenu.addEventListener('click', function() {
-            this.classList.toggle('active');
-        });
-
-        // Gallery filter functionality
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -10% 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const animateElements = document.querySelectorAll('.artist-card, .gallery-item, .testimonial');
-            animateElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'all 0.6s ease';
-                observer.observe(el);
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+            if (!navbar) return;
+            if (window.scrollY > 100) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
         });
     </script>
 </body>
